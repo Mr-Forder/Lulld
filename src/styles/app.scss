@@ -1,23 +1,26 @@
 @import "./player";
 @import "./song";
 @import "./library";
+@import "./nav";
 
-
-*{
-margin: 0;
-padding: 0;
-box-sizing: border-box;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-
-h1, h2, h3{
-    color: rgb(82, 82, 82);
+h1,
+h2,
+h3 {
+  color: rgb(82, 82, 82);
 }
 
-body{    font-family: 'Lato', sans-serif;}
+body {
+  font-family: "Lato", sans-serif;
+}
 
-
-h3,h4{
-    font-weight: 400;
-    color: rgb(122, 122, 122);
+h3,
+h4 {
+  font-weight: 400;
+  color: rgb(122, 122, 122);
 }

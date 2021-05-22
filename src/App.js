@@ -5,6 +5,7 @@ import Song from "./components/Song";
 import Library from "./components/Library";
 //import our track data
 import data from "./util";
+import Nav from "./components/Nav";
 //add styles
 import "./styles/app.scss";
 
@@ -18,6 +19,7 @@ function App() {
     currentTime: 0,
     duration: 0,
   });
+  const [libraryStatus, setLibraryStatus] = useState(false);
   const timeUpdateHandler = (e) => {
     const current = e.target.currentTime;
     const duration = e.target.duration;
@@ -25,6 +27,7 @@ function App() {
   };
   return (
     <div className="App">
+      <Nav libraryStatus={libraryStatus} setLibraryStatus={setLibraryStatus} />
       <Song currentSong={currentSong} />
       <Player
         setSongInfo={setSongInfo}
@@ -40,6 +43,7 @@ function App() {
         songs={songs}
         setCurrentSong={setCurrentSong}
         currentSong={currentSong}
+        libraryStatus={libraryStatus}
       />
       <audio
         onTimeUpdate={timeUpdateHandler}

@@ -9,6 +9,9 @@
   h2 {
     padding: 2rem;
   }
+  transform: translateX(-100%);
+  transition: all 0.5s ease;
+  opacity: 0;
 }
 
 .library-song {
@@ -55,4 +58,9 @@
 
 .selected {
   background: rgb(233, 233, 233);
+}
+
+.active-library {
+  transform: translateX(0%);
+  opacity: 1;
 }
