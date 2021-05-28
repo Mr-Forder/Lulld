@@ -20,15 +20,60 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .time-control input {
   width: 100%;
-  padding: 1rem 0rem;
+  -webkit-appearance: none;
+  background-color: transparent;
+  cursor: pointer;
 }
 
 .time-control p {
   padding: 1rem;
+}
+
+input[type="range"]:focus {
+  outline: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 16px;
+  width: 16px;
+}
+
+input[type="range"]::-moz-range-thumb {
+  -moz-appearance: none;
+  visibility: hidden;
+}
+
+.track {
+  background: lightblue;
+  width: 100%;
+  height: 1rem;
+  margin-top: 1rem;
+  position: relative;
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+.animate-track {
+  background: #cccccc;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  -webkit-transform: translateX(0%);
+          transform: translateX(0%);
+  pointer-events: none;
 }
 
 .play-control {
