@@ -61,27 +61,17 @@ function chillHop() {
       id: uuidv4(),
       active: false,
     },
-    //ADD MORE HERE
+
     {
-      name: "Beyond Clouds",
+      name: "Hideout",
       cover:
-      "https://chillhop.com/wp-content/uploads/2021/02/08cbb0848f669e1bd8b5a5152c4b7d20edf1b499-1024x1024.jpg",
-      artist: "Saib",
-      audio:"https://mp3.chillhop.com/serve.php/?mp3=677",
-      colour:["#FDF6D9", "#FB8E71"],
-      id: uuidv4(),
-      active: false,  
-    },
-    {
-        name: "Hideout",
-        cover:
         "https://chillhop.com/wp-content/uploads/2020/07/669e6ed53ce0d385e072ea9c77d159297bbca41f-1024x1024.jpg",
-        artist: "Tesk",
-        audio:"https://mp3.chillhop.com/serve.php/?mp3=2096",
-        colour:["#D8747C", "#DE9C56"],
-        id: uuidv4(),
-        active: false,  
-      },
+      artist: "Tesk",
+      audio: "https://mp3.chillhop.com/serve.php/?mp3=2096",
+      colour: ["#D8747C", "#DE9C56"],
+      id: uuidv4(),
+      active: false,
+    },
   ];
 }
 
