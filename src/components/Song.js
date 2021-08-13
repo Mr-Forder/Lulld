@@ -1,14 +1,17 @@
-import react from 'react';
+import react from "react";
 
-const Song = ({currentSong}) => {
-    return(
-<div className="song-container">
-<img class="song-cover" alt={currentSong.name}src={currentSong.cover}></img>
-<h2>{currentSong.name}</h2>
-<h3>{currentSong.artist}</h3>
-
-</div>
-    );
+const Song = ({ currentSong }) => {
+  return (
+    <div className="song-container">
+      <img
+        className="song-cover"
+        alt={currentSong.name}
+        src={currentSong.cover}
+      ></img>
+      <h2>{currentSong.name}</h2>
+      <h3>{currentSong.artist}</h3>
+    </div>
+  );
 };
 
 export default Song;

@@ -104,19 +104,19 @@ const Player = ({
       <div className="play-control">
         <FontAwesomeIcon
           onClick={() => skipTrackHandler(`skip-back`)}
-          classname="skip-back"
+          className="skip-back"
           size="2x"
           icon={faAngleLeft}
         />
         <FontAwesomeIcon
           onClick={playSongHandler}
-          classname="play"
+          className="play"
           size="2x"
           icon={isPlaying ? faPause : faPlay}
         />
         <FontAwesomeIcon
           onClick={() => skipTrackHandler(`skip-forward`)}
-          classname="skip-forward"
+          className="skip-forward"
           size="2x"
           icon={faAngleRight}
         />
