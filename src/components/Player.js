@@ -46,38 +46,18 @@ const Player = ({
 
   const skipTrackHandler = (direction) => {
     const currentIndex = songs.findIndex((s) => s.id === currentSong.id);
-    const songsLength = songs.length;
-    let index;
-    if (direction === "skip-back") {
-      const prevIndex = (currentIndex - 1) % songsLength;
-      if (prevIndex === -1) {
-        index = songs.length - 1;
-      } else {
-        index = (currentIndex - 1) % songsLength;
-      }
-    } else if ("skip-forward") {
-      index = (currentIndex + 1) % songsLength;
-      setCurrentSong();
+    if (direction === "skip-forward") {
+      setCurrentSong(songs[(currentIndex + 1) % songs.length]); //fix crash once current index skips past last track -
+      //utilise modulus operator to make sure that when index matches length of array, it goes back to begining of array
     }
-    playAudio(isPlaying, audioRef);
-    const songObj = songs[index];
-    setCurrentSong(songObj);
-
-    const newSongs = songs.map((s) => {
-      if (s.id === songObj.id) {
-        return {
-          ...s,
-          active: true,
-        };
-      } else {
-        return {
-          ...s,
-          active: false,
-        };
+    if (direction === "skip-back") {
+      if ((currentIndex - 1) % songs.length === -1) {
+        //same issue, when index hits -1, it'll error out, so do another if statement -
+        setCurrentSong(songs[songs.length - 1]); //so when index hits -1, instead of erroring out, we set currentSong to equal the last song in the array
+        return; // add return, otherwise previous statement will autorun, which will crash the app
       }
-    });
-
-    setSongs(newSongs);
+      setCurrentSong(songs[(currentIndex - 1) % songs.length]);
+    }
   };
   //Styles
   const trackAnim = {
@@ -89,7 +69,12 @@ const Player = ({
       <div className="time-control">
         <p>{getTime(songInfo.currentTime)}</p>
 
-        <div className="track">
+        <div
+          className="track"
+          style={{
+            background: `linear-gradient(to right, ${currentSong.color[0]},${currentSong.color[1]})`,
+          }}
+        >
           <input
             min={0}
             max={songInfo.duration || 0}

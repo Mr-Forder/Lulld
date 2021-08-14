@@ -5,6 +5,8 @@ export const playAudio = (isPlaying, audioRef) => {
       playPromise.then(() => {
         audioRef.current.play();
       });
+    } else {
+      audioRef.current.play();
     }
   }
 };
