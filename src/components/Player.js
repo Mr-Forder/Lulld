@@ -1,9 +1,12 @@
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; //import fontawesome
 import {
   faPlay,
   faAngleLeft,
   faAngleRight,
   faPause,
+  faVolumeDown,
+  faRandom,
 } from "@fortawesome/free-solid-svg-icons"; //import icons - just fa-play icon etc
 
 const Player = ({
@@ -17,9 +20,16 @@ const Player = ({
   setCurrentSong,
   setSongs,
 }) => {
-  //useRef
+  let last = songs.length; //total number of tracks
+  let randoTrack = Math.floor(Math.random() * last); //generate random number within bounds of songs array
+  const [random, setRandom] = useState(false); //shuffle button state - either true or false, set by toggling "random" button
 
-  //event handlers
+  const [activeVolume, setActiveVolume] = useState(false);
+  const changeVolume = (e) => {
+    let value = e.target.value;
+    audioRef.current.volume = value;
+    setSongInfo({ ...songInfo, volume: value });
+  };
 
   const playSongHandler = () => {
     if (isPlaying) {
@@ -43,9 +53,13 @@ const Player = ({
 
   const skipTrackHandler = async (direction) => {
     let currentIndex = songs.findIndex((s) => s.id === currentSong.id);
-    if (direction === "skip-forward") {
+    if (direction === "skip-forward" && !random) {
       await setCurrentSong(songs[(currentIndex + 1) % songs.length]); //fix crash once current index skips past last track -
       //utilise modulus operator to make sure that when index matches length of array, it goes back to begining of array
+    }
+    if (direction === "skip-forward" && random) {
+      //set current song to random if shuffle active
+      await setCurrentSong(songs[randoTrack]);
     }
     if (direction === "skip-back") {
       if ((currentIndex - 1) % songs.length === -1) {
@@ -56,8 +70,8 @@ const Player = ({
       }
       await setCurrentSong(songs[(currentIndex - 1) % songs.length]);
     }
-    if (isPlaying) audioRef.current.play();
   };
+
   //Styles
   const trackAnim = {
     transform: `translateX(${songInfo.animationPercentage}%)`, //interpolate animation percentege value into css translate so will animate on the fly
@@ -103,6 +117,28 @@ const Player = ({
           className="skip-forward"
           size="2x"
           icon={faAngleRight}
+        />
+        <FontAwesomeIcon
+          onClick={() => setActiveVolume(!activeVolume)}
+          icon={faVolumeDown}
+        />
+        {activeVolume && (
+          <input
+            onChange={changeVolume}
+            max="1"
+            min="0"
+            step="0.01"
+            type="range"
+          />
+        )}
+
+        <FontAwesomeIcon
+          style={random ? { opacity: 1 } : { opacity: 0.3 }}
+          onClick={() => setRandom(!random)}
+          onMouseOver={() => console.log(random)}
+          className="random"
+          size="1x"
+          icon={faRandom}
         />
       </div>
     </div>

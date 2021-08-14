@@ -49,7 +49,7 @@ function App() {
     //library-active class jsut adds 30% left margin, squishing main window down when activated. added transition effect in .App css to animate it.
     <div className={`App ${libraryStatus ? "library-active" : ""}`}>
       <Nav libraryStatus={libraryStatus} setLibraryStatus={setLibraryStatus} />
-      <Song currentSong={currentSong} />
+      <Song currentSong={currentSong} isPlaying={isPlaying} />
       <Player
         setSongInfo={setSongInfo}
         songInfo={songInfo}

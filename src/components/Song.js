@@ -1,8 +1,8 @@
-const Song = ({ currentSong }) => {
+const Song = ({ currentSong, isPlaying }) => {
   return (
     <div className="song-container">
       <img
-        className="song-cover"
+        className={isPlaying ? "rotateSong" : ""}
         alt={currentSong.name}
         src={currentSong.cover}
       ></img>

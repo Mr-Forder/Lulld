@@ -133,6 +133,33 @@ input[type="range"]::-moz-range-thumb {
   font-size: 1rem;
 }
 
+@-webkit-keyframes rotate {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+@keyframes rotate {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+.rotateSong {
+  -webkit-animation: rotate 20s linear forwards infinite;
+          animation: rotate 20s linear forwards infinite;
+}
+
 @media screen and (max-width: 768px) {
   .song-container img {
     width: 60%;
