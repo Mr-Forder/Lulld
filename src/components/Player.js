@@ -19,11 +19,11 @@ const Player = ({
   songs,
   setCurrentSong,
   setSongs,
+  last,
+  randoTrack,
+  random,
+  setRandom,
 }) => {
-  let last = songs.length; //total number of tracks
-  let randoTrack = Math.floor(Math.random() * last); //generate random number within bounds of songs array
-  const [random, setRandom] = useState(false); //shuffle button state - either true or false, set by toggling "random" button
-
   const [activeVolume, setActiveVolume] = useState(false);
   const changeVolume = (e) => {
     let value = e.target.value;

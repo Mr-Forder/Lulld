@@ -37,10 +37,18 @@ function App() {
     });
   };
 
+  //SHUFFLE MODE
+  let last = songs.length; //total number of tracks
+  let randoTrack = Math.floor(Math.random() * last); //generate random number within bounds of songs array
+  const [random, setRandom] = useState(false); //shuffle button state - either true or false, set by toggling "random" button
+
   const songEndHandler = async () => {
     //just copied my skip forward functionality so it'll run onEnded
     let currentIndex = songs.findIndex((s) => s.id === currentSong.id); //create currentIndex, set equal to index of array item (song) with id equal to that of current song
-    await setCurrentSong(songs[(currentIndex + 1) % songs.length]); //set currentsong to current index + 1, with modulus to prevent crash if goes past array length
+
+    if (!random) await setCurrentSong(songs[(currentIndex + 1) % songs.length]); //set currentsong to current index + 1, with modulus to prevent crash if goes past array length
+    if (isPlaying) audioRef.current.play(); //if song isplaying when this happens, play the song we've just skipped to
+    if (random) await setCurrentSong(songs[randoTrack]); //if shuffle active, set current song to rando track
     if (isPlaying) audioRef.current.play(); //if song isplaying when this happens, play the song we've just skipped to
   };
 
@@ -60,6 +68,10 @@ function App() {
         setCurrentSong={setCurrentSong}
         songs={songs}
         setSongs={setSongs}
+        last={last}
+        randoTrack={randoTrack}
+        random={random}
+        setRandom={setRandom}
       />
       <Library
         isPlaying={isPlaying}
