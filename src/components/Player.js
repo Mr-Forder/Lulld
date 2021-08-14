@@ -129,6 +129,7 @@ const Player = ({
             min="0"
             step="0.01"
             type="range"
+            value={audioRef.current.volume}
           />
         )}
 
