@@ -1,4 +1,4 @@
-import react, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 //add components
 import Player from "./components/Player";
 import Song from "./components/Song";
@@ -36,8 +36,18 @@ function App() {
       animationPercentage: animation,
     });
   };
+
+  const songEndHandler = async () => {
+    //just copied my skip forward functionality so it'll run onEnded
+    let currentIndex = songs.findIndex((s) => s.id === currentSong.id); //create currentIndex, set equal to index of array item (song) with id equal to that of current song
+    await setCurrentSong(songs[(currentIndex + 1) % songs.length]); //set currentsong to current index + 1, with modulus to prevent crash if goes past array length
+    if (isPlaying) audioRef.current.play(); //if song isplaying when this happens, play the song we've just skipped to
+  };
+
   return (
-    <div className="App">
+    //interpolated classname - classname is App - check if library state is active, if so,  add "library-active" class to it, otherwise, do nothing.
+    //library-active class jsut adds 30% left margin, squishing main window down when activated. added transition effect in .App css to animate it.
+    <div className={`App ${libraryStatus ? "library-active" : ""}`}>
       <Nav libraryStatus={libraryStatus} setLibraryStatus={setLibraryStatus} />
       <Song currentSong={currentSong} />
       <Player
@@ -64,6 +74,7 @@ function App() {
         ref={audioRef}
         src={currentSong.audio}
         onLoadedMetadata={timeUpdateHandler}
+        onEnded={songEndHandler}
       ></audio>
     </div>
   );

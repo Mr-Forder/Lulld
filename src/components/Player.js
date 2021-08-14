@@ -1,4 +1,3 @@
-import react, { useEffect } from "react"; //import react, useRef
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; //import fontawesome
 import {
   faPlay,
@@ -6,7 +5,7 @@ import {
   faAngleRight,
   faPause,
 } from "@fortawesome/free-solid-svg-icons"; //import icons - just fa-play icon etc
-import { playAudio } from "../util";
+
 const Player = ({
   audioRef,
   currentSong,
@@ -22,8 +21,6 @@ const Player = ({
 
   //event handlers
 
-  //UseEffect
-  useEffect(() => {});
   const playSongHandler = () => {
     if (isPlaying) {
       audioRef.current.pause();
@@ -44,20 +41,22 @@ const Player = ({
     setSongInfo({ ...songInfo, currentTime: e.target.value });
   };
 
-  const skipTrackHandler = (direction) => {
-    const currentIndex = songs.findIndex((s) => s.id === currentSong.id);
+  const skipTrackHandler = async (direction) => {
+    let currentIndex = songs.findIndex((s) => s.id === currentSong.id);
     if (direction === "skip-forward") {
-      setCurrentSong(songs[(currentIndex + 1) % songs.length]); //fix crash once current index skips past last track -
+      await setCurrentSong(songs[(currentIndex + 1) % songs.length]); //fix crash once current index skips past last track -
       //utilise modulus operator to make sure that when index matches length of array, it goes back to begining of array
     }
     if (direction === "skip-back") {
       if ((currentIndex - 1) % songs.length === -1) {
         //same issue, when index hits -1, it'll error out, so do another if statement -
-        setCurrentSong(songs[songs.length - 1]); //so when index hits -1, instead of erroring out, we set currentSong to equal the last song in the array
+        await setCurrentSong(songs[songs.length - 1]); //so when index hits -1, instead of erroring out, we set currentSong to equal the last song in the array
+        if (isPlaying) audioRef.current.play();
         return; // add return, otherwise previous statement will autorun, which will crash the app
       }
-      setCurrentSong(songs[(currentIndex - 1) % songs.length]);
+      await setCurrentSong(songs[(currentIndex - 1) % songs.length]);
     }
+    if (isPlaying) audioRef.current.play();
   };
   //Styles
   const trackAnim = {

@@ -94,6 +94,15 @@ input[type="range"]::-moz-range-thumb {
   cursor: pointer;
 }
 
+@media screen and (max-width: 768px) {
+  .time-control {
+    width: 90%;
+  }
+  .play-control {
+    width: 60%;
+  }
+}
+
 .song-container {
   min-height: 60vh;
   display: -webkit-box;
@@ -124,7 +133,14 @@ input[type="range"]::-moz-range-thumb {
   font-size: 1rem;
 }
 
+@media screen and (max-width: 768px) {
+  .song-container img {
+    width: 60%;
+  }
+}
+
 .library {
+  background: white;
   position: fixed;
   top: 0;
   left: 0%;
@@ -153,6 +169,8 @@ input[type="range"]::-moz-range-thumb {
           align-items: center;
   padding: 1rem 2rem 1rem 2rem;
   cursor: pointer;
+  -webkit-transition: background 0.5s ease;
+  transition: background 0.5s ease;
 }
 
 .library-song img {
@@ -204,6 +222,12 @@ input[type="range"]::-moz-range-thumb {
   opacity: 1;
 }
 
+@media screen and (max-width: 768px) {
+  .library {
+    width: 100%;
+  }
+}
+
 nav {
   min-height: 10vh;
   display: -webkit-box;
@@ -231,6 +255,12 @@ button:hover {
   color: white;
 }
 
+@media screen and (max-width: 768px) {
+  nav button {
+    z-index: 10;
+  }
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -252,5 +282,14 @@ h3,
 h4 {
   font-weight: 400;
   color: #7a7a7a;
+}
+
+.App {
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+.library-active {
+  margin-left: 30%;
 }
 /*# sourceMappingURL=app.css.map */
