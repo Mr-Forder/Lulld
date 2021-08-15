@@ -71,7 +71,7 @@ const Player = ({
       await setCurrentSong(songs[(currentIndex - 1) % songs.length]);
     }
   };
-
+  console.log(audioRef);
   //Styles
   const trackAnim = {
     transform: `translateX(${songInfo.animationPercentage}%)`, //interpolate animation percentege value into css translate so will animate on the fly
@@ -100,6 +100,13 @@ const Player = ({
         <p>{getTime(songInfo.duration || 0)}</p>
       </div>
       <div className="play-control">
+        <FontAwesomeIcon
+          style={random ? { opacity: 1 } : { opacity: 0.3 }}
+          onClick={() => setRandom(!random)} //toggle shuffle
+          className="random"
+          size="1x"
+          icon={faRandom}
+        />
         <FontAwesomeIcon
           onClick={() => skipTrackHandler(`skip-back`)}
           className="skip-back"
@@ -130,17 +137,9 @@ const Player = ({
             step="0.01"
             type="range"
             value={audioRef.current.volume}
+            orient="vertical"
           />
         )}
-
-        <FontAwesomeIcon
-          style={random ? { opacity: 1 } : { opacity: 0.3 }}
-          onClick={() => setRandom(!random)}
-          onMouseOver={() => console.log(random)}
-          className="random"
-          size="1x"
-          icon={faRandom}
-        />
       </div>
     </div>
   );

@@ -14,7 +14,7 @@ function App() {
   //state
   const [songs, setSongs] = useState(data()); //pulls data from our util.js file - const songs = an array of objects (songs) from util.js
   const [currentSong, setCurrentSong] = useState(songs[0]); //grabs the first song from out const songs array
-  const [isPlaying, setIsPlaying] = useState(false); //set isplaying as state, set to false cos it shouldnt be playing automatically
+
   const [songInfo, setSongInfo] = useState({
     currentTime: 0,
     duration: 0,
@@ -36,7 +36,7 @@ function App() {
       animationPercentage: animation,
     });
   };
-
+  const [isPlaying, setIsPlaying] = useState(false); //set isplaying as state, set to false cos it shouldnt be playing automatically
   //SHUFFLE MODE
   let last = songs.length; //total number of tracks
   let randoTrack = Math.floor(Math.random() * last); //generate random number within bounds of songs array
