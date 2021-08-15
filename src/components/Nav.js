@@ -5,11 +5,14 @@ import { faMusic } from "@fortawesome/free-solid-svg-icons";
 const Nav = ({ setLibraryStatus, libraryStatus }) => {
   return (
     <nav>
-      <h1>Chillhop Player v1.0</h1>
-      <button onClick={() => setLibraryStatus(!libraryStatus)}>
-        Library
-        <FontAwesomeIcon icon={faMusic} />
-      </button>
+      <div className="nav-container">
+        <button onClick={() => setLibraryStatus(!libraryStatus)}>
+          Today's playlist
+          <FontAwesomeIcon icon={faMusic} />
+        </button>
+        <h1>Shuffle</h1>
+        <h1>Volume</h1>
+      </div>
     </nav>
   );
 };

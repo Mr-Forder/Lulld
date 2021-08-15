@@ -1,15 +1,22 @@
 nav {
-  min-height: 10vh;
+  position: absolute;
+  height: 8rem;
+  border-radius: 1rem;
+  top: 10%;
+  right: 5%;
+  padding: 1rem;
+  color: white;
   display: flex;
-  justify-content: space-around;
-  align-items: center;
+  justify-content: flex-end;
+  align-items: flex-start;
+  background: black;
 }
 button {
   background: transparent;
-
+  color: white;
   border: none;
   cursor: pointer;
-  border: 2px solid rgb(65, 65, 65);
+  font-size: 1rem;
   padding: 0.5rem;
   transition: all 0.3s ease;
   &:hover {
@@ -20,6 +27,7 @@ button {
 
 @media screen and (max-width: 768px) {
   nav {
+    width: 70%;
     button {
       z-index: 10;
     }

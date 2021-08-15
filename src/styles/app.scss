@@ -2,6 +2,7 @@
 @import "./song";
 @import "./library";
 @import "./nav";
+@import "./animBg";
 
 * {
   margin: 0;
@@ -22,13 +23,5 @@ body {
 h3,
 h4 {
   font-weight: 400;
-  color: rgb(122, 122, 122);
-}
-
-.App {
-  transition: all 0.5s ease;
-}
-
-.library-active {
-  margin-left: 30%;
+  color: white;
 }

@@ -6,8 +6,11 @@ import Library from "./components/Library";
 //import our track data
 import data from "./data";
 import Nav from "./components/Nav";
-//add styles
+//styles
 import "./styles/app.scss";
+//Animated bg
+import { useLottie } from "lottie-react";
+import lighthouseLandscape from "./img/lighthouse-landscape.json";
 
 function App() {
   const audioRef = useRef(null); //const, give it whatever name you like, set it to useRef react func (imported above)
@@ -52,10 +55,19 @@ function App() {
     if (isPlaying) audioRef.current.play(); //if song isplaying when this happens, play the song we've just skipped to
   };
 
+  const options = {
+    animationData: lighthouseLandscape,
+    loop: true,
+    autoplay: true,
+  };
+
+  const { View } = useLottie(options);
+
   return (
     //interpolated classname - classname is App - check if library state is active, if so,  add "library-active" class to it, otherwise, do nothing.
     //library-active class jsut adds 30% left margin, squishing main window down when activated. added transition effect in .App css to animate it.
     <div className={`App ${libraryStatus ? "library-active" : ""}`}>
+      <div className="anim-bg">{View}</div>
       <Nav libraryStatus={libraryStatus} setLibraryStatus={setLibraryStatus} />
       <Song currentSong={currentSong} isPlaying={isPlaying} />
       <Player
