@@ -83,3 +83,12 @@ input[type="range"]::-moz-range-thumb {
     width: 60%;
   }
 }
+
+@media screen and (max-width: 768px) {
+  nav {
+    width: 70%;
+    button {
+      z-index: 80;
+    }
+  }
+}
