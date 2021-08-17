@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; //import fontawesome
 import {
   faPlay,
@@ -23,24 +23,8 @@ const Player = ({
   randoTrack,
   random,
   setRandom,
+  playSongHandler,
 }) => {
-  const [activeVolume, setActiveVolume] = useState(false);
-  const changeVolume = (e) => {
-    let value = e.target.value;
-    audioRef.current.volume = value;
-    setSongInfo({ ...songInfo, volume: value });
-  };
-
-  const playSongHandler = () => {
-    if (isPlaying) {
-      audioRef.current.pause();
-      setIsPlaying(!isPlaying); // use setIsPlaying as a func (built into react) to set it to the opposite of whatever it is
-    } else {
-      audioRef.current.play();
-      setIsPlaying(!isPlaying);
-    }
-  };
-
   const getTime = (time) => {
     return (
       Math.floor(time / 60) + ":" + ("0" + Math.floor(time % 60)).slice(-2)
@@ -71,42 +55,16 @@ const Player = ({
       await setCurrentSong(songs[(currentIndex - 1) % songs.length]);
     }
   };
-  console.log(audioRef);
+
   //Styles
   const trackAnim = {
     transform: `translateX(${songInfo.animationPercentage}%)`, //interpolate animation percentege value into css translate so will animate on the fly
     //We then set the style of our animate-style div to interpolated value of this variable (on line)
   };
+
   return (
     <div className="player">
-      <div className="time-control">
-        <p>{getTime(songInfo.currentTime)}</p>
-
-        <div
-          className="track"
-          style={{
-            background: `linear-gradient(to right, ${currentSong.color[0]},${currentSong.color[1]})`,
-          }}
-        >
-          <input
-            min={0}
-            max={songInfo.duration || 0}
-            value={songInfo.currentTime}
-            onChange={dragHandler}
-            type="range"
-          />
-          <div style={trackAnim} className="animate-track"></div>
-        </div>
-        <p>{getTime(songInfo.duration || 0)}</p>
-      </div>
       <div className="play-control">
-        <FontAwesomeIcon
-          style={random ? { opacity: 1 } : { opacity: 0.3 }}
-          onClick={() => setRandom(!random)} //toggle shuffle
-          className="random"
-          size="1x"
-          icon={faRandom}
-        />
         <FontAwesomeIcon
           onClick={() => skipTrackHandler(`skip-back`)}
           className="skip-back"
@@ -114,7 +72,7 @@ const Player = ({
           icon={faAngleLeft}
         />
         <FontAwesomeIcon
-          onClick={playSongHandler}
+          onClickCapture={playSongHandler}
           className="play"
           size="2x"
           icon={isPlaying ? faPause : faPlay}
@@ -125,21 +83,6 @@ const Player = ({
           size="2x"
           icon={faAngleRight}
         />
-        <FontAwesomeIcon
-          onClick={() => setActiveVolume(!activeVolume)}
-          icon={faVolumeDown}
-        />
-        {activeVolume && (
-          <input
-            onChange={changeVolume}
-            max="1"
-            min="0"
-            step="0.01"
-            type="range"
-            value={audioRef.current.volume}
-            orient="vertical"
-          />
-        )}
       </div>
     </div>
   );

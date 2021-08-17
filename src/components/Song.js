@@ -23,30 +23,32 @@ const Song = ({ currentSong, isPlaying, audioRef, songInfo, setSongInfo }) => {
           src={currentSong.cover}
         ></img>
       </div>
+
       <div className="song-info">
         <h4>Now Playing:</h4>
         <h2>{currentSong.name}</h2>
         <h3>{currentSong.artist}</h3>
-      </div>
-      <div className="time-control">
-        <p>{getTime(songInfo.currentTime)}</p>
 
-        <div
-          className="track"
-          style={{
-            background: `linear-gradient(to right, ${currentSong.color[0]},${currentSong.color[1]})`,
-          }}
-        >
-          <input
-            min={0}
-            max={songInfo.duration || 0}
-            value={songInfo.currentTime}
-            onChange={dragHandler}
-            type="range"
-          />
-          <div style={trackAnim} className="animate-track"></div>
+        <div className="time-control">
+          {/* <p>{getTime(songInfo.currentTime)}</p> */}
+
+          <div
+            className="track"
+            style={{
+              background: `linear-gradient(to right, ${currentSong.color[0]},${currentSong.color[1]})`,
+            }}
+          >
+            <input
+              min={0}
+              max={songInfo.duration || 0}
+              value={songInfo.currentTime}
+              onChange={dragHandler}
+              type="range"
+            />
+            <div style={trackAnim} className="animate-track"></div>
+          </div>
+          {/* <p>{getTime(songInfo.duration || 0)}</p> */}
         </div>
-        <p>{getTime(songInfo.duration || 0)}</p>
       </div>
     </div>
   );

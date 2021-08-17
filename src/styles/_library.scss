@@ -1,14 +1,17 @@
 .library {
-  background: white;
+  background: black;
   position: fixed;
   top: 0;
   left: 0%;
   width: 20rem;
   height: 100%;
   overflow: scroll;
-  box-shadow: 2px 2px 50px rgb(224, 224, 224);
+
   h2 {
     padding: 2rem;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: lighter;
   }
   transform: translateX(-100%);
   transition: all 0.5s ease;
@@ -25,7 +28,7 @@
   cursor: pointer;
   transition: background 0.5s ease;
   &:hover {
-    background: rgb(236, 248, 255);
+    background: rgb(0, 113, 179);
   }
 }
 
@@ -59,7 +62,7 @@
 }
 
 .selected {
-  background: rgb(233, 233, 233);
+  background: rgb(78, 78, 78);
 }
 
 .active-library {
