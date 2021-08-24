@@ -149,6 +149,28 @@ function App() {
     deviceDetector();
   }, []);
 
+  //TICKERTAPE
+
+  const [tickerTape, setTickerTape] = useState(true);
+  //begin tickertape
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTickerTape(!tickerTape);
+      console.log("This will run 30 secs!");
+    }, 30000);
+    return () => clearInterval(interval);
+  }, [tickerTape]);
+  //Close tickertape
+  useEffect(() => {
+    if (tickerTape) {
+      const interval = setInterval(() => {
+        setTickerTape(!tickerTape);
+        console.log("closing tickertape!");
+      }, 25000);
+      return () => clearInterval(interval);
+    }
+  }, []);
+
   return (
     //interpolated classname - classname is App - check if library state is active, if so,  add "library-active" class to it, otherwise, do nothing.
     //library-active class jsut adds 30% left margin, squishing main window down when activated. added transition effect in .App css to animate it.
@@ -160,13 +182,15 @@ function App() {
           onClick={playSongHandler}
         />
       </div>
-      <div className="tickertape">
+      <div
+        className={`${tickerTape ? "tickertape visible" : "tickertape hidden"}`}
+      >
         <div className="ticker-img">
           <Lottie animationData={tape} />
         </div>
         <p className="marquee">
           <span>
-            Welcome to Lulld - Non stop Lo-fi. A unique playlist everytime.
+            Welcome to Lulld - Non stop Lo-fi. A unique playlist every time.
             Check back for more music - more animations coming soon!
           </span>
         </p>
