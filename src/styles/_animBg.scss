@@ -20,7 +20,7 @@
 }
 
 .tickertape {
-  border: 2px solid white;
+  border: 1px solid white;
   border-radius: 5px;
   background: black;
   color: white;
@@ -31,6 +31,7 @@
   top: 7rem;
   left: 50%;
   z-index: 1;
+  cursor: pointer;
 }
 
 .ticker-img {
@@ -39,8 +40,12 @@
   margin-left: -15rem;
   top: 0.8rem;
   z-index: 2;
+  pointer-events: none;
 }
 
+.marquee {
+  color: white;
+}
 @media screen and (max-width: 1268px) {
   .anim-bg {
     bottom: -35%;
@@ -51,56 +56,10 @@
   .anim-bg {
     bottom: -5%;
   }
-  .tickertape {
-    top: 15rem;
-    width: 90%;
-    left: 2rem;
-  }
-  .ticker-img {
-    width: 50px;
-    position: fixed;
-    width: 35rem;
-    margin-left: -14rem;
-    top: 8.5rem;
-    z-index: 201;
-  }
 }
 
 @media screen and (max-width: 468px) {
   .anim-bg {
     bottom: -30%;
   }
-}
-
-.marquee {
-  margin: 0 auto;
-  white-space: nowrap;
-  overflow: hidden;
-}
-
-.marquee span {
-  display: inline-block;
-  padding-left: 100%;
-  animation: marquee 25s linear infinite;
-}
-
-/* Make it move */
-@keyframes marquee {
-  0% {
-    transform: translate(0, 0);
-  }
-  100% {
-    transform: translate(-100%, 0);
-  }
-}
-
-.visible {
-  visibility: visible;
-  opacity: 1;
-  transition: opacity 1s linear;
-}
-.hidden {
-  visibility: hidden;
-  opacity: 0;
-  transition: visibility 0s 2s, opacity 1s linear;
 }

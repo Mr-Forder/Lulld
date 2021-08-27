@@ -11,6 +11,8 @@ import {
   faPlayCircle,
   faPauseCircle,
 } from "@fortawesome/free-solid-svg-icons"; //import icons - just fa-play icon etc
+//framer
+import { motion } from "framer-motion";
 
 const Song = ({
   skipTrackHandler,
@@ -42,7 +44,11 @@ const Song = ({
   };
 
   return (
-    <div className="song-container">
+    <motion.div
+      className="song-container"
+      animate={{ opacity: 1, transition: { duration: 2 } }}
+      initial={{ opacity: 0 }}
+    >
       <div className="song-img">
         <img
           className={isPlaying ? "rotateSong" : ""}
@@ -98,7 +104,7 @@ const Song = ({
           {/* <p>{getTime(songInfo.duration || 0)}</p> */}
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

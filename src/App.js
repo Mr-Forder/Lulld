@@ -6,11 +6,12 @@ import Library from "./components/Library";
 //import our track data
 import data from "./data";
 import Nav from "./components/Nav";
-import Welcome from "./components/Welcome";
+
 //styles
 import "./styles/app.scss";
 //framer
 import { motion } from "framer-motion";
+
 //Animated bg
 import { useLottie } from "lottie-react";
 import Lottie from "lottie-react";
@@ -19,9 +20,18 @@ import lighthousePortrait from "./img/lighthouse-portrait.json";
 import tape from "./img/drip.json";
 //device detection
 import { isMobile } from "react-device-detect";
+//loading
+import Loading from "./components/Loading";
 
 //CREATE RANDOM PLAYLIST
 function App() {
+  //loading screen
+
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    setTimeout(() => setLoading(false), 200); //extend me to do a PROPA animated loader
+  }, []);
+
   function getRandom(arr, n) {
     let result = new Array(n),
       len = arr.length,
@@ -131,12 +141,11 @@ function App() {
 
   const { View } = useLottie(options);
 
-  const [showWelcome, setShowWelcome] = useState(true);
+  const [showWelcome, setShowWelcome] = useState(false);
 
   const welcomeHandler = () => {
     setShowWelcome(!showWelcome);
-    audioRef.current.play();
-    setIsPlaying(true);
+    setTickerTape(!setTickerTape);
   };
 
   const deviceDetector = () => {
@@ -156,7 +165,7 @@ function App() {
   useEffect(() => {
     const interval = setInterval(() => {
       setTickerTape(!tickerTape);
-      console.log("This will run 30 secs!");
+      console.log("This will run 60 secs!");
     }, 30000);
     return () => clearInterval(interval);
   }, [tickerTape]);
@@ -166,91 +175,106 @@ function App() {
       const interval = setInterval(() => {
         setTickerTape(!tickerTape);
         console.log("closing tickertape!");
-      }, 25000);
+      }, 24000);
       return () => clearInterval(interval);
     }
   }, []);
 
   return (
-    //interpolated classname - classname is App - check if library state is active, if so,  add "library-active" class to it, otherwise, do nothing.
-    //library-active class jsut adds 30% left margin, squishing main window down when activated. added transition effect in .App css to animate it.
-    <div className={`App ${libraryStatus ? "library-active" : ""}`}>
-      <div className="anim-bg">
-        <Lottie
-          className="lighthouse"
-          animationData={bgRender}
-          onClick={playSongHandler}
-        />
-      </div>
-      <div
-        className={`${tickerTape ? "tickertape visible" : "tickertape hidden"}`}
-      >
-        <div className="ticker-img">
-          <Lottie animationData={tape} />
+    <>
+      {loading === false ? (
+        //interpolated classname - classname is App - check if library state is active, if so,  add "library-active" class to it, otherwise, do nothing.
+        //library-active class jsut adds 30% left margin, squishing main window down when activated. added transition effect in .App css to animate it.
+        <div className={`App ${libraryStatus ? "library-active" : ""}`}>
+          <motion.div
+            className="anim-bg"
+            animate={{ opacity: 1, transition: { duration: 1 } }}
+            initial={{ opacity: 0 }}
+          >
+            <Lottie
+              className="lighthouse"
+              animationData={bgRender}
+              onClick={playSongHandler}
+            />
+          </motion.div>
+          <motion.div
+            animate={{ opacity: 1, transition: { duration: 2 } }}
+            initial={{ opacity: 0 }}
+          >
+            <div
+              className={`${
+                tickerTape ? "tickertape visible" : "tickertape hidden"
+              }`}
+              onClick={welcomeHandler}
+            >
+              <div className="ticker-img">
+                <Lottie animationData={tape} />
+              </div>
+              <p className="marquee">
+                <span>
+                  Welcome to Lulld - Non stop Lo-fi. A unique playlist every
+                  time. Click or tap anywhere to begin. More to come!
+                </span>
+              </p>
+            </div>
+          </motion.div>
+
+          <div
+            className={`${showWelcome ? "welcome visible" : "welcome hidden"}`}
+            onClick={welcomeHandler}
+          >
+            <div className="welcome-text"></div>
+
+            <div className="tape">
+              <Lottie animationData={tape} />
+            </div>
+          </div>
+
+          <Nav
+            libraryStatus={libraryStatus}
+            setLibraryStatus={setLibraryStatus}
+            audioRef={audioRef}
+            songInfo={songInfo}
+            setSongInfo={setSongInfo}
+            random={random}
+            setRandom={setRandom}
+            songs={songs}
+          />
+          <Song
+            currentSong={currentSong}
+            isPlaying={isPlaying}
+            setSongInfo={setSongInfo}
+            songInfo={songInfo}
+            audioRef={audioRef}
+            playSongHandler={playSongHandler}
+            songs={songs}
+            setSongs={setSongs}
+            random={random}
+            setCurrentSong={setCurrentSong}
+            randoTrack={randoTrack}
+            skipTrackHandler={skipTrackHandler}
+          />
+
+          <Library
+            isPlaying={isPlaying}
+            audioRef={audioRef}
+            songs={songs}
+            setCurrentSong={setCurrentSong}
+            currentSong={currentSong}
+            libraryStatus={libraryStatus}
+          />
+          <audio
+            onTimeUpdate={timeUpdateHandler}
+            ref={audioRef}
+            src={currentSong.audio}
+            onLoadedMetadata={timeUpdateHandler}
+            onEnded={songEndHandler}
+          ></audio>
         </div>
-        <p className="marquee">
-          <span>
-            Welcome to Lulld - Non stop Lo-fi. A unique playlist every time.
-            Check back for more music - more animations coming soon!
-          </span>
-        </p>
-      </div>
-
-      <div
-        className="welcome-container"
-        onClick={welcomeHandler}
-        style={showWelcome ? { opacity: 1 } : { display: "none" }}
-      >
-        <motion.div
-          className="tape"
-          animate={{ opacity: 1, transition: { duration: 1 } }}
-          initial={{ opacity: 0 }}
-        >
-          <Lottie animationData={tape} />
-        </motion.div>
-      </div>
-
-      <Nav
-        libraryStatus={libraryStatus}
-        setLibraryStatus={setLibraryStatus}
-        audioRef={audioRef}
-        songInfo={songInfo}
-        setSongInfo={setSongInfo}
-        random={random}
-        setRandom={setRandom}
-        songs={songs}
-      />
-      <Song
-        currentSong={currentSong}
-        isPlaying={isPlaying}
-        setSongInfo={setSongInfo}
-        songInfo={songInfo}
-        audioRef={audioRef}
-        playSongHandler={playSongHandler}
-        songs={songs}
-        setSongs={setSongs}
-        random={random}
-        setCurrentSong={setCurrentSong}
-        randoTrack={randoTrack}
-        skipTrackHandler={skipTrackHandler}
-      />
-
-      <Library
-        isPlaying={isPlaying}
-        audioRef={audioRef}
-        songs={songs}
-        setCurrentSong={setCurrentSong}
-        currentSong={currentSong}
-        libraryStatus={libraryStatus}
-      />
-      <audio
-        onTimeUpdate={timeUpdateHandler}
-        ref={audioRef}
-        src={currentSong.audio}
-        onLoadedMetadata={timeUpdateHandler}
-        onEnded={songEndHandler}
-      ></audio>
-    </div>
+      ) : (
+        <Loading />
+      )}
+    </>
   );
 }
 
