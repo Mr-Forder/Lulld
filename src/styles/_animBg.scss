@@ -6,6 +6,25 @@
   z-index: -5;
 }
 
+.lighthouse {
+}
+
+.camper-landscape {
+  position: absolute;
+  object-fit: fill;
+  width: 100%;
+  margin-top: -8rem;
+}
+.camper-container {
+  padding-bottom: 5rem;
+  background: #f3deb3;
+  height: 100%;
+}
+.camper-portrait {
+  position: fixed;
+
+  left: -14rem;
+}
 .App {
   transition: all 0.5s ease;
 }
