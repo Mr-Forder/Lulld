@@ -19,6 +19,7 @@ import lighthouseLandscape from "./img/lighthouse-landscape.json";
 import lighthousePortrait from "./img/lighthouse-portrait.json";
 import camperVanLandscape from "./img/camper.json";
 import camperVanPortrait from "./img/camper.json";
+
 import tape from "./img/drip.json";
 //device detection
 import { isMobile } from "react-device-detect";
