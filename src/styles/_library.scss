@@ -1,5 +1,5 @@
 .library {
-  background: black;
+  background: rgb(0, 113, 179);
   position: fixed;
   top: 0;
   left: 0%;
@@ -29,7 +29,7 @@
   cursor: pointer;
   transition: background 0.5s ease;
   &:hover {
-    background: rgb(0, 113, 179);
+    background: rgb(0, 33, 53);
   }
 }
 
@@ -63,7 +63,7 @@
 }
 
 .selected {
-  background: rgb(78, 78, 78);
+  background: rgb(0, 134, 211);
 }
 
 .active-library {
