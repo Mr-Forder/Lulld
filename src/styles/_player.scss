@@ -11,6 +11,19 @@
   opacity: 1;
 }
 
+.thumb {
+  width: 4.5rem;
+  cursor: pointer;
+}
+
+.thumbs {
+  width: 21rem;
+  display: flex;
+
+  position: absolute;
+  top: 14rem;
+  left: 3rem;
+}
 .play-control {
   display: flex;
   justify-content: space-between;

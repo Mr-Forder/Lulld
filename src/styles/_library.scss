@@ -12,7 +12,6 @@
     padding: 2rem;
     color: white;
     font-size: 1.5rem;
-    font-weight: lighter;
   }
   transform: translateX(-100%);
   transition: all 0.5s ease;
@@ -37,9 +36,10 @@
   padding-left: 1rem;
   h3 {
     font-size: 1rem;
+    font-weight: bold;
   }
   h4 {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
   }
 }
 

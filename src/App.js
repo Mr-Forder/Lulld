@@ -19,7 +19,13 @@ import lighthouseLandscape from "./img/lighthouse-landscape.json";
 import lighthousePortrait from "./img/lighthouse-portrait.json";
 import camperVanLandscape from "./img/camper.json";
 import camperVanPortrait from "./img/camper.json";
-
+import planeLandscape from "./img/plane-landscape.json";
+import cityLandscape from "./img/city-landscape.json";
+//thumbs
+import camperThumb from "./img/camperthumb.svg";
+import lighthouseThumb from "./img/lighthousethumb.svg";
+import planeThumb from "./img/planethumb.svg";
+import cityThumb from "./img/citythumb.svg";
 import tape from "./img/drip.json";
 //device detection
 import { isMobile } from "react-device-detect";
@@ -197,7 +203,6 @@ function App() {
             bgClass={bgClass}
             playSongHandler={playSongHandler}
           />
-
           <motion.div
             animate={{ opacity: 1, transition: { duration: 2 } }}
             initial={{ opacity: 0 }}
@@ -219,7 +224,6 @@ function App() {
               </p>
             </div>
           </motion.div>
-
           <div
             className={`${showWelcome ? "welcome visible" : "welcome hidden"}`}
             onClick={welcomeHandler}
@@ -230,7 +234,6 @@ function App() {
               <Lottie animationData={tape} />
             </div>
           </div>
-
           <Nav
             libraryStatus={libraryStatus}
             setLibraryStatus={setLibraryStatus}
@@ -241,6 +244,42 @@ function App() {
             setRandom={setRandom}
             songs={songs}
           />
+
+          <div className="thumbs">
+            <div className="thumb">
+              <img
+                src={camperThumb}
+                onClick={() => {
+                  setBgRender(camperVanLandscape);
+                }}
+              ></img>
+            </div>
+            <div className="thumb">
+              <img
+                src={lighthouseThumb}
+                onClick={() => {
+                  setBgRender(lighthouseLandscape);
+                }}
+              ></img>
+            </div>
+            <div className="thumb">
+              <img
+                src={planeThumb}
+                onClick={() => {
+                  setBgRender(planeLandscape);
+                }}
+              ></img>
+            </div>
+            <div className="thumb">
+              <img
+                src={cityThumb}
+                onClick={() => {
+                  setBgRender(cityLandscape);
+                }}
+              ></img>
+            </div>
+          </div>
+
           <Song
             currentSong={currentSong}
             isPlaying={isPlaying}
@@ -255,7 +294,6 @@ function App() {
             randoTrack={randoTrack}
             skipTrackHandler={skipTrackHandler}
           />
-
           <Library
             isPlaying={isPlaying}
             audioRef={audioRef}
