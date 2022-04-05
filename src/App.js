@@ -21,11 +21,14 @@ import camperVanLandscape from "./img/camper.json";
 import camperVanPortrait from "./img/camper.json";
 import planeLandscape from "./img/plane-landscape.json";
 import cityLandscape from "./img/city-landscape.json";
+import planeLandscapeColours from "./img/road-landscape.json";
+import roadLandscape from "./img/road-nocar.json";
 //thumbs
 import camperThumb from "./img/camperthumb.svg";
 import lighthouseThumb from "./img/lighthousethumb.svg";
 import planeThumb from "./img/planethumb.svg";
 import cityThumb from "./img/citythumb.svg";
+import roadThumb from "./img/roadthumb.svg";
 import tape from "./img/drip.json";
 //device detection
 import { isMobile } from "react-device-detect";
@@ -194,7 +197,7 @@ function App() {
 
   return (
     <>
-      {!loading ? (
+      {loading ? (
         //interpolated classname - classname is App - check if library state is active, if so,  add "library-active" class to it, otherwise, do nothing.
         //library-active class jsut adds 30% left margin, squishing main window down when activated. added transition effect in .App css to animate it.
         <div className={`App ${libraryStatus ? "library-active" : ""}`}>
@@ -275,6 +278,14 @@ function App() {
                 src={cityThumb}
                 onClick={() => {
                   setBgRender(cityLandscape);
+                }}
+              ></img>
+            </div>
+            <div className="thumb">
+              <img
+                src={roadThumb}
+                onClick={() => {
+                  setBgRender(roadLandscape);
                 }}
               ></img>
             </div>
