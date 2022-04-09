@@ -6,7 +6,7 @@ import Library from "./components/Library";
 //import our track data
 import data from "./data";
 import Nav from "./components/Nav";
-
+import ChangeBgMenu from "./components/ChangeBgMenu";
 //styles
 import "./styles/app.scss";
 //framer
@@ -30,6 +30,12 @@ import planeThumb from "./img/planethumb.svg";
 import cityThumb from "./img/citythumb.svg";
 import roadThumb from "./img/roadthumb.svg";
 import tape from "./img/drip.json";
+//better thumbs?
+import camperThumbBig from "./img/camper-thumb-big.jpg";
+import roadThumbBig from "./img/road-thumb-big.jpg";
+import cityThumbBig from "./img/city-thumb-big.jpg";
+import lighthouseThumbBig from "./img/lighthouse-thumb-big.jpg";
+import planeThumbBig from "./img/plane-thumb-big.jpg";
 //device detection
 import { isMobile } from "react-device-detect";
 //loading
@@ -40,8 +46,9 @@ function App() {
   //loading screen
 
   const [loading, setLoading] = useState(true);
+
   useEffect(() => {
-    setTimeout(() => setLoading(false), 200); //extend me to do a PROPA animated loader
+    setTimeout(() => setLoading(false), 2200); //extend me to do a PROPA animated loader
   }, []);
 
   function getRandom(arr, n) {
@@ -197,7 +204,7 @@ function App() {
 
   return (
     <>
-      {loading ? (
+      {!loading ? (
         //interpolated classname - classname is App - check if library state is active, if so,  add "library-active" class to it, otherwise, do nothing.
         //library-active class jsut adds 30% left margin, squishing main window down when activated. added transition effect in .App css to animate it.
         <div className={`App ${libraryStatus ? "library-active" : ""}`}>
@@ -248,48 +255,14 @@ function App() {
             songs={songs}
           />
 
-          <div className="thumbs">
-            <div className="thumb">
-              <img
-                src={camperThumb}
-                onClick={() => {
-                  setBgRender(camperVanLandscape);
-                }}
-              ></img>
-            </div>
-            <div className="thumb">
-              <img
-                src={lighthouseThumb}
-                onClick={() => {
-                  setBgRender(lighthouseLandscape);
-                }}
-              ></img>
-            </div>
-            <div className="thumb">
-              <img
-                src={planeThumb}
-                onClick={() => {
-                  setBgRender(planeLandscape);
-                }}
-              ></img>
-            </div>
-            <div className="thumb">
-              <img
-                src={cityThumb}
-                onClick={() => {
-                  setBgRender(cityLandscape);
-                }}
-              ></img>
-            </div>
-            <div className="thumb">
-              <img
-                src={roadThumb}
-                onClick={() => {
-                  setBgRender(roadLandscape);
-                }}
-              ></img>
-            </div>
-          </div>
+          <ChangeBgMenu
+            setBgRender={setBgRender}
+            camperVanLandscape={camperVanLandscape}
+            planeLandscape={planeLandscape}
+            lighthouseLandscape={lighthouseLandscape}
+            cityLandscape={cityLandscape}
+            roadLandscape={roadLandscape}
+          />
 
           <Song
             currentSong={currentSong}

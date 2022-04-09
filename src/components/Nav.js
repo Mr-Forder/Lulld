@@ -46,22 +46,16 @@ const Nav = ({
         <div>
           <div className="button">
             <FontAwesomeIcon
-              className="button"
               style={random ? { opacity: 1 } : { opacity: 0.3 }}
               onClick={() => setRandom(!random)} //toggle shuffle
-              className="random"
+              className="shuffle"
               size="1x"
               icon={faRandom}
             />
           </div>
           <div className="button">
             <a href="https://twitter.com/lu11d">
-              <FontAwesomeIcon
-                className="button"
-                className="random"
-                size="1x"
-                icon={faTwitter}
-              />
+              <FontAwesomeIcon className="random" size="1x" icon={faTwitter} />
             </a>
           </div>
         </div>
