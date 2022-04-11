@@ -1,3 +1,39 @@
+.thumbs-big {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  width: 24.5rem;
+  top: 9rem;
+  left: 3%;
+  z-index: 51;
+  background: rgb(0, 33, 53);
+  padding: 1rem 1.25rem;
+  border-radius: 0rem 0rem 1rem 1rem;
+
+  :hover {
+    scale: 0.95;
+    transition: all 0.5s ease;
+  }
+}
+.choose-bg {
+  border-radius: 0rem 0rem 1rem 1rem;
+  width: 24.5rem;
+  height: 3rem;
+  padding: 0.3rem 1rem 0.5rem 0rem;
+
+  color: white;
+  position: absolute;
+  left: 3%;
+  top: 8rem;
+  background: rgb(0, 33, 53);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  z-index: 50;
+  cursor: pointer;
+}
 .song-container {
   width: 24.5rem;
   border-radius: 1rem;
@@ -6,7 +42,7 @@
 
   position: absolute;
   top: 1rem;
-  left: 1rem;
+  left: 3%;
   background: rgb(0, 33, 53);
 
   display: flex;
@@ -14,7 +50,7 @@
   align-items: center;
   justify-content: flex-start;
   flex-wrap: wrap;
-  z-index: -3;
+  z-index: 50;
 
   img {
     width: 5.5rem;
@@ -23,10 +59,10 @@
   }
 
   h3 {
-    font-size: 1rem;
+    font-size: 0.9rem;
   }
   h2 {
-    font-size: 1.2rem;
+    font-size: 1rem;
   }
 }
 
