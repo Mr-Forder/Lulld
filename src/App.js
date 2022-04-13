@@ -140,29 +140,29 @@ function App() {
   const [bgRender, setBgRender] = useState(camperVanLandscape);
   const [bgClass, setBgClass] = useState("camper-landscape");
 
-  // useEffect(() => {
+  useEffect(() => {
+    if (window.innerHeight > window.innerWidth) {
+      //portrait
+      setBgClass("camper-portrait");
+    } else {
+      //landscape
+
+      setBgClass("camper-landscape");
+    }
+  }, []);
+
+  //set landscape or portrait on window resize
+  // window.addEventListener("resize", function () {
   //   if (window.innerHeight > window.innerWidth) {
   //     //portrait
+  //     setBgRender(camperVanLandscape);
   //     setBgClass("camper-portrait");
   //   } else {
   //     //landscape
-
+  //     setBgRender(camperVanLandscape);
   //     setBgClass("camper-landscape");
   //   }
-  // }, []);
-
-  //set landscape or portrait on window resize
-  window.addEventListener("resize", function () {
-    if (window.innerHeight > window.innerWidth) {
-      //portrait
-      setBgRender(camperVanLandscape);
-      // setBgClass("camper-portrait");
-    } else {
-      //landscape
-      setBgRender(camperVanLandscape);
-      // setBgClass("camper-landscape");
-    }
-  });
+  // });
   //TICKERTAPE
   const welcomeHandler = () => {
     setShowWelcome(!showWelcome);

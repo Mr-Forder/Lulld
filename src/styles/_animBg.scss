@@ -1,9 +1,14 @@
 .anim-bg {
-  // width: 100%;
-  // height: 100%;
-  // position: fixed;
-  // object-fit: fill;
-  // z-index: -5;
+  position: fixed;
+  object-fit: fill;
+  z-index: -5;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: #006eb3;
+  top: 0;
+  left: 0;
 }
 
 //BG CSSSSSS'S
@@ -22,6 +27,7 @@
   position: absolute;
   top: 45%;
   transform: translateY(-50%);
+  padding: 0;
 }
 .road-landscape {
   margin-top: -8%;
@@ -32,6 +38,7 @@
   top: 50%;
   transform: translateY(-50%);
   width: 100%;
+  margin-top: 10%;
 }
 ///////////////////////////////
 .plane-portrait {
@@ -44,13 +51,24 @@
   margin-top: -10%;
 }
 ///////////////////////////////
+.city-container {
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+}
 .city-portrait {
-  //CENTERED PERFECTLY VERTICAL
-  position: absolute;
-  width: 110%;
-  height: 110%;
-  transform: rotateZ(90deg, translateY(-50%));
-  top: 50%;
+  transform: translateY(-50%) rotate(-90deg);
+  margin-top: 30rem;
+  min-width: 190%;
+
+  overflow: hidden;
+}
+
+@media screen and (max-width: 846px) {
+  .city-portrait {
+    margin-top: 20rem;
+  }
 }
 .city-landscape {
   margin-top: -5%;

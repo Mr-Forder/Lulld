@@ -12,6 +12,7 @@ const ChangeBgMenu = ({
   planeLandscape,
   lighthouseLandscape,
   cityLandscape,
+
   roadLandscape,
   planePortrait,
   lighthousePortrait,
@@ -113,8 +114,8 @@ const ChangeBgMenu = ({
                   if (window.innerHeight > window.innerWidth) {
                     //portrait
                     setBgRender(cityLandscape);
-                    setBgChangeMenu(!bgChangeMenu);
                     setBgClass("city-portrait");
+                    setBgChangeMenu(!bgChangeMenu);
                   } else {
                     //landscape
                     setBgRender(cityLandscape);
