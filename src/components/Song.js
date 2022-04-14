@@ -45,13 +45,8 @@ const Song = ({
 
   return (
     <>
-      {" "}
-      <motion.div
-        className="song-container"
-        animate={{ opacity: 1, transition: { duration: 2 } }}
-        initial={{ opacity: 0 }}
-      >
-        <div className="song-img">
+      <div className="song-container">
+        <div className="song-img" onClickCapture={playSongHandler}>
           <img
             className={isPlaying ? "rotateSong" : ""}
             alt={currentSong.name}
@@ -106,7 +101,7 @@ const Song = ({
             {/* <p>{getTime(songInfo.duration || 0)}</p> */}
           </div>
         </div>
-      </motion.div>
+      </div>
     </>
   );
 };

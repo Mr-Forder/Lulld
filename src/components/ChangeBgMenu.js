@@ -5,6 +5,12 @@ import roadThumbBig from "../img/road-thumb-big.jpg";
 import cityThumbBig from "../img/city-thumb-big.jpg";
 import lighthouseThumbBig from "../img/lighthouse-thumb-big.jpg";
 import planeThumbBig from "../img/plane-thumb-big.jpg";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faBars,
+  faTimes,
+  faChevronDown,
+} from "@fortawesome/free-solid-svg-icons";
 
 const ChangeBgMenu = ({
   setBgRender,
@@ -12,15 +18,14 @@ const ChangeBgMenu = ({
   planeLandscape,
   lighthouseLandscape,
   cityLandscape,
-
+  bgChangeMenu,
+  setBgChangeMenu,
   roadLandscape,
   planePortrait,
   lighthousePortrait,
   roadPortrait,
   setBgClass,
 }) => {
-  const [bgChangeMenu, setBgChangeMenu] = useState(false);
-
   const bgMenuAni = {
     hidden: { opacity: 0, y: -50 },
     show: {
@@ -32,14 +37,16 @@ const ChangeBgMenu = ({
   return (
     <>
       <motion.div
-        transition={{ layout: { type: "spring" } }}
         layout
         className="choose-bg"
         onClick={() => {
           setBgChangeMenu(!bgChangeMenu);
         }}
       >
-        Choose BG!
+        <FontAwesomeIcon
+          icon={bgChangeMenu ? faTimes : faChevronDown}
+          color="#ed118a"
+        />
       </motion.div>
       <AnimatePresence>
         {bgChangeMenu && (
@@ -47,7 +54,7 @@ const ChangeBgMenu = ({
             variants={bgMenuAni}
             initial="hidden"
             animate="show"
-            exit={{ opacity: 0, y: -50 }}
+            exit={{ opacity: 0, y: -25 }}
             className="thumbs-big"
             key="bg-change-menu "
           >
@@ -69,7 +76,8 @@ const ChangeBgMenu = ({
                 }}
               ></img>
             </motion.div>
-            <motion.div variants={bgMenuAni} className="thumb-big">
+
+            {/* <motion.div variants={bgMenuAni} className="thumb-big">
               <img
                 src={planeThumbBig}
                 onClick={() => {
@@ -82,6 +90,25 @@ const ChangeBgMenu = ({
                     //landscape
                     setBgRender(planeLandscape);
                     setBgClass("plane-landscape");
+                    setBgChangeMenu(!bgChangeMenu);
+                  }
+                }}
+              ></img>
+            </motion.div> */}
+
+            <motion.div variants={bgMenuAni} className="thumb-big">
+              <img
+                src={cityThumbBig}
+                onClick={() => {
+                  if (window.innerHeight > window.innerWidth) {
+                    //portrait
+                    setBgRender(cityLandscape);
+                    setBgClass("city-portrait");
+                    setBgChangeMenu(!bgChangeMenu);
+                  } else {
+                    //landscape
+                    setBgRender(cityLandscape);
+                    setBgClass("city-landscape");
                     setBgChangeMenu(!bgChangeMenu);
                   }
                 }}
@@ -101,25 +128,6 @@ const ChangeBgMenu = ({
                     //landscape
                     setBgRender(lighthouseLandscape);
                     setBgClass("lighthouse-landscape");
-                    setBgChangeMenu(!bgChangeMenu);
-                  }
-                }}
-              ></img>
-            </motion.div>
-
-            <motion.div variants={bgMenuAni} className="thumb-big">
-              <img
-                src={cityThumbBig}
-                onClick={() => {
-                  if (window.innerHeight > window.innerWidth) {
-                    //portrait
-                    setBgRender(cityLandscape);
-                    setBgClass("city-portrait");
-                    setBgChangeMenu(!bgChangeMenu);
-                  } else {
-                    //landscape
-                    setBgRender(cityLandscape);
-                    setBgClass("city-landscape");
                     setBgChangeMenu(!bgChangeMenu);
                   }
                 }}

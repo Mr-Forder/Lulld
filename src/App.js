@@ -62,6 +62,8 @@ function App() {
   //state
   const [songs, setSongs] = useState(randomList); //pulls data from our util.js file - const songs = an array of objects (songs) from util.js
   const [currentSong, setCurrentSong] = useState(songs[0]); //grabs the first song from out const songs array
+  //bg menu change
+  const [bgChangeMenu, setBgChangeMenu] = useState(false);
 
   const [songInfo, setSongInfo] = useState({
     currentTime: 0,
@@ -171,13 +173,19 @@ function App() {
 
   const [tickerTape, setTickerTape] = useState(true);
   //begin tickertape
+
   useEffect(() => {
-    const interval = setInterval(() => {
-      setTickerTape(!tickerTape);
-      console.log("This will run 60 secs!");
-    }, 30000);
-    return () => clearInterval(interval);
+    if (bgRender !== planePortrait) {
+      const interval = setInterval(() => {
+        setTickerTape(!tickerTape);
+        console.log("This will run 30 secs!");
+      }, 30000);
+      return () => clearInterval(interval);
+    } else {
+      console.log("tickertape disabled");
+    }
   }, [tickerTape]);
+
   //Close tickertape
   useEffect(() => {
     if (tickerTape) {
@@ -200,6 +208,7 @@ function App() {
             bgClass={bgClass}
             playSongHandler={playSongHandler}
           />
+
           <motion.div
             animate={{ opacity: 1, transition: { duration: 1 } }}
             initial={{ opacity: 0 }}
@@ -241,34 +250,41 @@ function App() {
             setRandom={setRandom}
             songs={songs}
           />
-
-          <ChangeBgMenu
-            setBgClass={setBgClass}
-            lighthousePortrait={lighthousePortrait}
-            planePortrait={planePortrait}
-            roadPortrait={roadPortrait}
-            setBgRender={setBgRender}
-            camperVanLandscape={camperVanLandscape}
-            planeLandscape={planeLandscape}
-            lighthouseLandscape={lighthouseLandscape}
-            cityLandscape={cityLandscape}
-            roadLandscape={roadLandscape}
-          />
-
-          <Song
-            currentSong={currentSong}
-            isPlaying={isPlaying}
-            setSongInfo={setSongInfo}
-            songInfo={songInfo}
-            audioRef={audioRef}
-            playSongHandler={playSongHandler}
-            songs={songs}
-            setSongs={setSongs}
-            random={random}
-            setCurrentSong={setCurrentSong}
-            randoTrack={randoTrack}
-            skipTrackHandler={skipTrackHandler}
-          />
+          <motion.div
+            animate={{ opacity: 1, transition: { duration: 1 } }}
+            initial={{ opacity: 0 }}
+            className="main-controls"
+          >
+            <Song
+              currentSong={currentSong}
+              isPlaying={isPlaying}
+              setSongInfo={setSongInfo}
+              songInfo={songInfo}
+              audioRef={audioRef}
+              playSongHandler={playSongHandler}
+              songs={songs}
+              setSongs={setSongs}
+              random={random}
+              setCurrentSong={setCurrentSong}
+              randoTrack={randoTrack}
+              skipTrackHandler={skipTrackHandler}
+            />
+            <ChangeBgMenu
+              bgChangeMenu={bgChangeMenu}
+              setBgChangeMenu={setBgChangeMenu}
+              setBgClass={setBgClass}
+              lighthousePortrait={lighthousePortrait}
+              planePortrait={planePortrait}
+              roadPortrait={roadPortrait}
+              setBgRender={setBgRender}
+              camperVanLandscape={camperVanLandscape}
+              planeLandscape={planeLandscape}
+              lighthouseLandscape={lighthouseLandscape}
+              cityLandscape={cityLandscape}
+              roadLandscape={roadLandscape}
+            />
+          </motion.div>
+          {/* {bgChangeMenu && <div className="choice-overlay"></div>} */}
           <Library
             isPlaying={isPlaying}
             audioRef={audioRef}
