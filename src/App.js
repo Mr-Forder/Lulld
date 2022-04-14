@@ -270,6 +270,8 @@ function App() {
               skipTrackHandler={skipTrackHandler}
             />
             <ChangeBgMenu
+              loading={loading}
+              setLoading={setLoading}
               bgChangeMenu={bgChangeMenu}
               setBgChangeMenu={setBgChangeMenu}
               setBgClass={setBgClass}

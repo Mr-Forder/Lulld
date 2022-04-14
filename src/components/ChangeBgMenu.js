@@ -6,6 +6,7 @@ import cityThumbBig from "../img/city-thumb-big.jpg";
 import lighthouseThumbBig from "../img/lighthouse-thumb-big.jpg";
 import planeThumbBig from "../img/plane-thumb-big.jpg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Loading from "../components/Loading";
 import {
   faBars,
   faTimes,
@@ -13,6 +14,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 const ChangeBgMenu = ({
+  loading,
+  setLoading,
   setBgRender,
   camperVanLandscape,
   planeLandscape,
@@ -36,48 +39,59 @@ const ChangeBgMenu = ({
   };
   return (
     <>
-      <motion.div
-        layout
-        className="choose-bg"
-        onClick={() => {
-          setBgChangeMenu(!bgChangeMenu);
-        }}
-      >
-        <FontAwesomeIcon
-          icon={bgChangeMenu ? faTimes : faChevronDown}
-          color="#ed118a"
-        />
-      </motion.div>
-      <AnimatePresence>
-        {bgChangeMenu && (
+      {!loading ? (
+        <>
           <motion.div
-            variants={bgMenuAni}
-            initial="hidden"
-            animate="show"
-            exit={{ opacity: 0, y: -25 }}
-            className="thumbs-big"
-            key="bg-change-menu "
+            layout
+            className="choose-bg"
+            onClick={() => {
+              setBgChangeMenu(!bgChangeMenu);
+            }}
           >
-            <motion.div variants={bgMenuAni} className="thumb-big">
-              <img
-                src={camperThumbBig}
-                onClick={() => {
-                  if (window.innerHeight > window.innerWidth) {
-                    //portrait
-                    setBgRender(camperVanLandscape);
-                    setBgClass("camper-portrait");
-                    setBgChangeMenu(!bgChangeMenu);
-                  } else {
-                    //landscape
-                    setBgRender(camperVanLandscape);
-                    setBgClass("camper-landscape");
-                    setBgChangeMenu(!bgChangeMenu);
-                  }
-                }}
-              ></img>
-            </motion.div>
+            <FontAwesomeIcon
+              icon={bgChangeMenu ? faTimes : faChevronDown}
+              color="#ed118a"
+            />
+          </motion.div>
+          <AnimatePresence>
+            {bgChangeMenu && (
+              <motion.div
+                variants={bgMenuAni}
+                initial="hidden"
+                animate="show"
+                exit={{ opacity: 0, y: -25 }}
+                className="thumbs-big"
+                key="bg-change-menu "
+              >
+                <motion.div variants={bgMenuAni} className="thumb-big">
+                  <img
+                    src={camperThumbBig}
+                    onClick={() => {
+                      if (window.innerHeight > window.innerWidth) {
+                        //portrait
+                        setLoading(true);
+                        setTimeout(function () {
+                          setLoading(false);
+                        }, 2000);
+                        setBgRender(camperVanLandscape);
+                        setBgClass("camper-portrait");
+                        setBgChangeMenu(!bgChangeMenu);
+                      } else {
+                        //landscape
 
-            {/* <motion.div variants={bgMenuAni} className="thumb-big">
+                        setLoading(true);
+                        setTimeout(function () {
+                          setLoading(false);
+                        }, 2000);
+                        setBgRender(camperVanLandscape);
+                        setBgClass("camper-landscape");
+                        setBgChangeMenu(!bgChangeMenu);
+                      }
+                    }}
+                  ></img>
+                </motion.div>
+
+                {/* <motion.div variants={bgMenuAni} className="thumb-big">
               <img
                 src={planeThumbBig}
                 onClick={() => {
@@ -96,65 +110,93 @@ const ChangeBgMenu = ({
               ></img>
             </motion.div> */}
 
-            <motion.div variants={bgMenuAni} className="thumb-big">
-              <img
-                src={cityThumbBig}
-                onClick={() => {
-                  if (window.innerHeight > window.innerWidth) {
-                    //portrait
-                    setBgRender(cityLandscape);
-                    setBgClass("city-portrait");
-                    setBgChangeMenu(!bgChangeMenu);
-                  } else {
-                    //landscape
-                    setBgRender(cityLandscape);
-                    setBgClass("city-landscape");
-                    setBgChangeMenu(!bgChangeMenu);
-                  }
-                }}
-              ></img>
-            </motion.div>
+                <motion.div variants={bgMenuAni} className="thumb-big">
+                  <img
+                    src={cityThumbBig}
+                    onClick={() => {
+                      if (window.innerHeight > window.innerWidth) {
+                        //portrait
+                        setLoading(true);
+                        setTimeout(function () {
+                          setLoading(false);
+                        }, 2000);
+                        setBgRender(cityLandscape);
+                        setBgClass("city-portrait");
+                        setBgChangeMenu(!bgChangeMenu);
+                      } else {
+                        //landscape
+                        setLoading(true);
+                        setTimeout(function () {
+                          setLoading(false);
+                        }, 2000);
+                        setBgRender(cityLandscape);
+                        setBgClass("city-landscape");
+                        setBgChangeMenu(!bgChangeMenu);
+                      }
+                    }}
+                  ></img>
+                </motion.div>
 
-            <motion.div variants={bgMenuAni} className="thumb-big">
-              <img
-                src={lighthouseThumbBig}
-                onClick={() => {
-                  if (window.innerHeight > window.innerWidth) {
-                    //portrait
-                    setBgRender(lighthousePortrait);
-                    setBgChangeMenu(!bgChangeMenu);
-                    setBgClass("lighthouse-portrait");
-                  } else {
-                    //landscape
-                    setBgRender(lighthouseLandscape);
-                    setBgClass("lighthouse-landscape");
-                    setBgChangeMenu(!bgChangeMenu);
-                  }
-                }}
-              ></img>
-            </motion.div>
+                <motion.div variants={bgMenuAni} className="thumb-big">
+                  <img
+                    src={lighthouseThumbBig}
+                    onClick={() => {
+                      if (window.innerHeight > window.innerWidth) {
+                        //portrait
+                        setLoading(true);
+                        setTimeout(function () {
+                          setLoading(false);
+                        }, 2000);
+                        setBgRender(lighthousePortrait);
+                        setBgChangeMenu(!bgChangeMenu);
+                        setBgClass("lighthouse-portrait");
+                      } else {
+                        //landscape
+                        setLoading(true);
+                        setTimeout(function () {
+                          setLoading(false);
+                        }, 2000);
+                        setBgRender(lighthouseLandscape);
+                        setBgClass("lighthouse-landscape");
+                        setBgChangeMenu(!bgChangeMenu);
+                      }
+                    }}
+                  ></img>
+                </motion.div>
 
-            <motion.div variants={bgMenuAni} className="thumb-big">
-              <img
-                src={roadThumbBig}
-                onClick={() => {
-                  if (window.innerHeight > window.innerWidth) {
-                    //portrait
-                    setBgRender(roadPortrait);
-                    setBgChangeMenu(!bgChangeMenu);
-                    setBgClass("road-portrait");
-                  } else {
-                    //landscape
-                    setBgRender(roadLandscape);
-                    setBgClass("road-landscape");
-                    setBgChangeMenu(!bgChangeMenu);
-                  }
-                }}
-              ></img>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+                <motion.div variants={bgMenuAni} className="thumb-big">
+                  <img
+                    src={roadThumbBig}
+                    onClick={() => {
+                      if (window.innerHeight > window.innerWidth) {
+                        //portrait
+                        setLoading(true);
+                        setTimeout(function () {
+                          setLoading(false);
+                        }, 2000);
+                        setBgRender(roadPortrait);
+                        setBgChangeMenu(!bgChangeMenu);
+                        setBgClass("road-portrait");
+                      } else {
+                        //landscape
+                        setLoading(true);
+                        setTimeout(function () {
+                          setLoading(false);
+                        }, 2000);
+                        setBgRender(roadLandscape);
+                        setBgClass("road-landscape");
+                        setBgChangeMenu(!bgChangeMenu);
+                      }
+                    }}
+                  ></img>
+                </motion.div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </>
+      ) : (
+        <Loading />
+      )}
     </>
   );
 };
