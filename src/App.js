@@ -284,6 +284,7 @@ function App() {
               lighthouseLandscape={lighthouseLandscape}
               cityLandscape={cityLandscape}
               roadLandscape={roadLandscape}
+              audioRef={audioRef}
             />
           </motion.div>
           {/* {bgChangeMenu && <div className="choice-overlay"></div>} */}
