@@ -2,14 +2,15 @@
   width: 100%;
   display: flex;
   justify-content: center;
-  height: 12rem;
-  margin-top: 1rem;
+  margin-top: 25px;
+
   @media screen and (min-width: 1080px) {
     justify-content: flex-start;
     margin-left: 3rem;
     margin-top: 2rem;
   }
 }
+
 .song-container {
   width: 24.5rem;
   border-radius: 1rem;
@@ -45,7 +46,7 @@
   padding: 0.3rem 1rem 0.3rem 1rem;
   color: white;
   position: absolute;
-  top: 8rem;
+  top: 142px;
   background: rgb(0, 33, 53);
   display: flex;
   align-items: center;
@@ -60,7 +61,7 @@
   flex-direction: column;
   position: absolute;
   width: 24.5rem;
-  top: 9rem;
+  top: 150px;
 
   z-index: 49;
   background: rgb(0, 33, 53);
@@ -71,6 +72,59 @@
     scale: 0.95;
     transition: all 0.5s ease;
   }
+}
+
+.onboard-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 24.5rem;
+  height: 3rem;
+  margin-top: 9rem;
+  animation: fadeOut 2s forwards;
+  animation-delay: 4s;
+}
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+.onboard {
+  display: flex;
+  justify-content: center;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  height: 2rem;
+  background: rgb(0, 33, 53);
+  color: white;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  z-index: 50;
+  overflow: hidden;
+  p {
+    font-size: 0.8rem;
+  }
+}
+
+.onboard-arrow {
+  content: "";
+  width: 0px;
+  height: 0px;
+  border-bottom: 10px solid rgb(0, 33, 53);
+  border-left: 10px solid transparent;
+  border-top: 10px solid transparent;
+  border-right: 10px solid transparent;
+  position: absolute;
+  margin-top: -50px;
+
+  z-index: 500000;
 }
 
 .song-info {

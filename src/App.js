@@ -55,7 +55,7 @@ function App() {
     }
     return result;
   }
-
+  const [tooltip, setTooltip] = useState();
   const randomList = getRandom(data(), 30);
 
   const audioRef = useRef(null); //const, give it whatever name you like, set it to useRef react func (imported above)
@@ -154,17 +154,17 @@ function App() {
   }, []);
 
   //set landscape or portrait on window resize
-  // window.addEventListener("resize", function () {
-  //   if (window.innerHeight > window.innerWidth) {
-  //     //portrait
-  //     setBgRender(camperVanLandscape);
-  //     setBgClass("camper-portrait");
-  //   } else {
-  //     //landscape
-  //     setBgRender(camperVanLandscape);
-  //     setBgClass("camper-landscape");
-  //   }
-  // });
+  window.addEventListener("resize", function () {
+    if (window.innerHeight > window.innerWidth) {
+      //     //     //portrait
+      setBgRender(camperVanLandscape);
+      setBgClass("camper-portrait");
+    } else {
+      //     //     //landscape
+      setBgRender(camperVanLandscape);
+      setBgClass("camper-landscape");
+    }
+  });
   //TICKERTAPE
   const welcomeHandler = () => {
     setShowWelcome(!showWelcome);
@@ -196,7 +196,10 @@ function App() {
       return () => clearInterval(interval);
     }
   }, []);
-
+  //tooltip timings
+  useEffect(() => {
+    setTimeout(() => setTooltip(true), 5000);
+  }, []);
   return (
     <>
       {!loading ? (
@@ -210,7 +213,7 @@ function App() {
           />
 
           <motion.div
-            animate={{ opacity: 1, transition: { duration: 1 } }}
+            animate={{ opacity: 1, transition: { duration: 0.2 } }}
             initial={{ opacity: 0 }}
           >
             <div
@@ -225,7 +228,7 @@ function App() {
               <p className="marquee">
                 <span>
                   Welcome to Lulld - Non stop Lo-fi. A unique playlist every
-                  time. Click or tap anywhere to begin. More to come!
+                  time. More to come.
                 </span>
               </p>
             </div>
@@ -234,8 +237,6 @@ function App() {
             className={`${showWelcome ? "welcome visible" : "welcome hidden"}`}
             onClick={welcomeHandler}
           >
-            <div className="welcome-text"></div>
-
             <div className="tape">
               <Lottie animationData={tape} />
             </div>
@@ -250,6 +251,7 @@ function App() {
             setRandom={setRandom}
             songs={songs}
           />
+
           <motion.div
             animate={{ opacity: 1, transition: { duration: 1 } }}
             initial={{ opacity: 0 }}
@@ -269,6 +271,19 @@ function App() {
               randoTrack={randoTrack}
               skipTrackHandler={skipTrackHandler}
             />
+            {tooltip && (
+              <motion.div
+                className="onboard-container"
+                animate={{ opacity: 1, transition: { duration: 0.5 } }}
+                initial={{ opacity: 0 }}
+              >
+                <div className="onboard-arrow"></div>
+                <div className="onboard">
+                  <p>Click or tap here to choose a background.</p>
+                </div>
+              </motion.div>
+            )}
+
             <ChangeBgMenu
               loading={loading}
               setLoading={setLoading}
@@ -287,7 +302,7 @@ function App() {
               audioRef={audioRef}
             />
           </motion.div>
-          {/* {bgChangeMenu && <div className="choice-overlay"></div>} */}
+
           <Library
             isPlaying={isPlaying}
             audioRef={audioRef}

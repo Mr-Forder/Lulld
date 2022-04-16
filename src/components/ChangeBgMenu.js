@@ -40,11 +40,11 @@ const ChangeBgMenu = ({
   return (
     <>
       {bgLoading && (
-        <div className="bg-loader">
+        <motion.div className="bg-loader">
           <Loading />
-        </div>
+        </motion.div>
       )}
-      (
+
       <>
         <motion.div
           layout
@@ -58,6 +58,7 @@ const ChangeBgMenu = ({
             color="#ed118a"
           />
         </motion.div>
+
         <AnimatePresence>
           {bgChangeMenu && (
             <motion.div
@@ -198,7 +199,6 @@ const ChangeBgMenu = ({
           )}
         </AnimatePresence>
       </>
-      )
     </>
   );
 };

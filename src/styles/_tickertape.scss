@@ -21,11 +21,11 @@
   pointer-events: none;
 }
 
-@media screen and (max-width: 768px) {
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) {
   .tickertape {
     top: 15rem;
     width: 90%;
-    left: 2rem;
+    left: 3rem;
     font-size: 0.8rem;
     height: 2rem;
   }
@@ -36,7 +36,9 @@
     top: 8.5rem;
   }
 }
-@media screen and (max-width: 768px) {
+
+/* Smartphones (portrait) ----------- */
+@media only screen and (max-width: 500px) {
   .tickertape {
     top: 15rem;
     width: 90%;
