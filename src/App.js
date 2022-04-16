@@ -198,7 +198,7 @@ function App() {
   }, []);
   //tooltip timings
   useEffect(() => {
-    setTimeout(() => setTooltip(true), 5000);
+    setTimeout(() => setTooltip(true), 7000);
   }, []);
   return (
     <>
@@ -237,8 +237,10 @@ function App() {
             className={`${showWelcome ? "welcome visible" : "welcome hidden"}`}
             onClick={welcomeHandler}
           >
-            <div className="tape">
-              <Lottie animationData={tape} />
+            <div className="about-container">
+              <div className="tape">
+                <Lottie animationData={tape} />
+              </div>
             </div>
           </div>
           <Nav
