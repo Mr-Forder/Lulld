@@ -57,7 +57,7 @@ function App() {
   }
   const [tooltip, setTooltip] = useState();
   const randomList = getRandom(data(), 30);
-
+  console.log(randomList);
   const audioRef = useRef(null); //const, give it whatever name you like, set it to useRef react func (imported above)
   //state
   const [songs, setSongs] = useState(randomList); //pulls data from our util.js file - const songs = an array of objects (songs) from util.js
@@ -175,15 +175,11 @@ function App() {
   //begin tickertape
 
   useEffect(() => {
-    if (bgRender !== planePortrait) {
-      const interval = setInterval(() => {
-        setTickerTape(!tickerTape);
-        console.log("This will run 30 secs!");
-      }, 30000);
-      return () => clearInterval(interval);
-    } else {
-      console.log("tickertape disabled");
-    }
+    const interval = setInterval(() => {
+      setTickerTape(!tickerTape);
+      console.log("This will run 30 secs!");
+    }, 30000);
+    return () => clearInterval(interval);
   }, [tickerTape]);
 
   //Close tickertape
@@ -200,6 +196,17 @@ function App() {
   useEffect(() => {
     setTimeout(() => setTooltip(true), 7000);
   }, []);
+
+  //display upcoming song
+  const [nextSong, setNextSong] = useState(null);
+  const [nextSongName, setNextSongName] = useState(null);
+  useEffect(() => {
+    const index = songs.findIndex(
+      (element) => element.name === currentSong.name
+    );
+    setNextSong(index + 1);
+    setNextSongName(songs[`${index + 1}` % songs.length]);
+  }, [currentSong]);
   return (
     <>
       {!loading ? (
@@ -227,12 +234,14 @@ function App() {
               </div>
               <p className="marquee">
                 <span>
-                  Welcome to Lulld - Non stop Lo-fi. A unique playlist every
-                  time. More to come.
+                  Next up: {nextSongName.name} by
+                  {nextSongName.artist}. Welcome to Lulld - Non stop Lo-fi. A
+                  unique playlist every time.
                 </span>
               </p>
             </div>
           </motion.div>
+
           <div
             className={`${showWelcome ? "welcome visible" : "welcome hidden"}`}
             onClick={welcomeHandler}
@@ -281,7 +290,7 @@ function App() {
               >
                 <div className="onboard-arrow"></div>
                 <div className="onboard">
-                  <p>Click or tap here to choose a background.</p>
+                  <p>Click or tap here to choose a background</p>
                 </div>
               </motion.div>
             )}
