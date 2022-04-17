@@ -234,9 +234,10 @@ function App() {
               </div>
               <p className="marquee">
                 <span>
-                  Next up: {nextSongName.name} by
-                  {nextSongName.artist}. Welcome to Lulld - Non stop Lo-fi. A
-                  unique playlist every time.
+                  Welcome to Lulld - Non stop Lo-fi. A unique playlist every
+                  time. Next up:{" "}
+                  <strong className="pink">{nextSongName.name}</strong> by{" "}
+                  <strong className="blue">{nextSongName.artist}</strong>.
                 </span>
               </p>
             </div>
