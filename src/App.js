@@ -233,12 +233,20 @@ function App() {
                 <Lottie animationData={tape} />
               </div>
               <p className="marquee">
-                <span>
-                  Welcome to Lulld - Non stop Lo-fi. A unique playlist every
-                  time. Next up:{" "}
-                  <strong className="pink">{nextSongName.name}</strong> by{" "}
-                  <strong className="blue">{nextSongName.artist}</strong>.
-                </span>
+                {!random ? (
+                  <span>
+                    Welcome to Lulld - Non stop Lo-fi. A unique playlist every
+                    time. Next up:{" "}
+                    <strong className="pink">{nextSongName.name}</strong> by{" "}
+                    <strong className="blue">{nextSongName.artist}</strong>...
+                  </span>
+                ) : (
+                  <span>
+                    Welcome to Lulld - Non stop Lo-fi. A unique playlist every
+                    time. <strong className="pink">Shuffle</strong> playback is
+                    currently <strong className="blue">active</strong>!
+                  </span>
+                )}
               </p>
             </div>
           </motion.div>
