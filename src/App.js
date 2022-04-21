@@ -6,16 +6,48 @@ import Library from "./components/Library";
 //import our track data
 import data from "./data";
 import Nav from "./components/Nav";
-import Welcome from "./components/Welcome";
+
 //styles
 import "./styles/app.scss";
+//framer
+import { motion } from "framer-motion";
+
 //Animated bg
 import { useLottie } from "lottie-react";
 import Lottie from "lottie-react";
 import lighthouseLandscape from "./img/lighthouse-landscape.json";
 import lighthousePortrait from "./img/lighthouse-portrait.json";
+import tape from "./img/drip.json";
+//device detection
+import { isMobile } from "react-device-detect";
+//loading
+import Loading from "./components/Loading";
 
+//CREATE RANDOM PLAYLIST
 function App() {
+  //loading screen
+
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    setTimeout(() => setLoading(false), 200); //extend me to do a PROPA animated loader
+  }, []);
+
+  function getRandom(arr, n) {
+    let result = new Array(n),
+      len = arr.length,
+      taken = new Array(len);
+    if (n > len)
+      throw new RangeError("getRandom: more elements taken than available");
+    while (n--) {
+      let x = Math.floor(Math.random() * len);
+      result[n] = arr[x in taken ? taken[x] : x];
+      taken[x] = --len in taken ? taken[len] : len;
+    }
+    return result;
+  }
+
+  const randomList = getRandom(data(), 30);
+
   //CONDITIONAL BG
   const [bgRender, setBgRender] = useState(lighthouseLandscape);
 
@@ -29,7 +61,7 @@ function App() {
 
   const audioRef = useRef(null); //const, give it whatever name you like, set it to useRef react func (imported above)
   //state
-  const [songs, setSongs] = useState(data()); //pulls data from our util.js file - const songs = an array of objects (songs) from util.js
+  const [songs, setSongs] = useState(randomList); //pulls data from our util.js file - const songs = an array of objects (songs) from util.js
   const [currentSong, setCurrentSong] = useState(songs[0]); //grabs the first song from out const songs array
 
   const [songInfo, setSongInfo] = useState({
@@ -66,6 +98,27 @@ function App() {
   };
   const [isPlaying, setIsPlaying] = useState(false); //set isplaying as state, set to false cos it shouldnt be playing automatically
 
+  const skipTrackHandler = async (direction) => {
+    let currentIndex = songs.findIndex((s) => s.id === currentSong.id);
+    if (direction === "skip-forward" && !random) {
+      await setCurrentSong(songs[(currentIndex + 1) % songs.length]); //fix crash once current index skips past last track -
+      //utilise modulus operator to make sure that when index matches length of array, it goes back to begining of array
+    }
+    if (direction === "skip-forward" && random) {
+      //set current song to random if shuffle active
+      await setCurrentSong(songs[randoTrack]);
+    }
+    if (direction === "skip-back") {
+      if ((currentIndex - 1) % songs.length === -1) {
+        //same issue, when index hits -1, it'll error out, so do another if statement -
+        await setCurrentSong(songs[songs.length - 1]); //so when index hits -1, instead of erroring out, we set currentSong to equal the last song in the array
+        if (isPlaying) audioRef.current.play();
+        return; // add return, otherwise previous statement will autorun, which will crash the app
+      }
+      await setCurrentSong(songs[(currentIndex - 1) % songs.length]);
+    }
+  };
+
   //SHUFFLE MODE
   let last = songs.length; //total number of tracks
   let randoTrack = Math.floor(Math.random() * last); //generate random number within bounds of songs array
@@ -88,80 +141,140 @@ function App() {
 
   const { View } = useLottie(options);
 
-  const [showWelcome, setShowWelcome] = useState(true);
+  const [showWelcome, setShowWelcome] = useState(false);
 
   const welcomeHandler = () => {
     setShowWelcome(!showWelcome);
-    console.log(showWelcome);
-    audioRef.current.play();
-    setIsPlaying(true);
+    setTickerTape(!setTickerTape);
   };
 
+  const deviceDetector = () => {
+    isMobile
+      ? setBgRender(lighthousePortrait)
+      : setBgRender(lighthouseLandscape);
+  };
+
+  useEffect(() => {
+    deviceDetector();
+  }, []);
+
+  //TICKERTAPE
+
+  const [tickerTape, setTickerTape] = useState(true);
+  //begin tickertape
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTickerTape(!tickerTape);
+      console.log("This will run 60 secs!");
+    }, 30000);
+    return () => clearInterval(interval);
+  }, [tickerTape]);
+  //Close tickertape
+  useEffect(() => {
+    if (tickerTape) {
+      const interval = setInterval(() => {
+        setTickerTape(!tickerTape);
+        console.log("closing tickertape!");
+      }, 24000);
+      return () => clearInterval(interval);
+    }
+  }, []);
+
   return (
-    //interpolated classname - classname is App - check if library state is active, if so,  add "library-active" class to it, otherwise, do nothing.
-    //library-active class jsut adds 30% left margin, squishing main window down when activated. added transition effect in .App css to animate it.
-    <div className={`App ${libraryStatus ? "library-active" : ""}`}>
-      <div className="anim-bg">
-        <Lottie animationData={bgRender} onClick={playSongHandler} />
-      </div>
+    <>
+      {loading === false ? (
+        //interpolated classname - classname is App - check if library state is active, if so,  add "library-active" class to it, otherwise, do nothing.
+        //library-active class jsut adds 30% left margin, squishing main window down when activated. added transition effect in .App css to animate it.
+        <div className={`App ${libraryStatus ? "library-active" : ""}`}>
+          <motion.div
+            className="anim-bg"
+            animate={{ opacity: 1, transition: { duration: 1 } }}
+            initial={{ opacity: 0 }}
+          >
+            <Lottie
+              className="lighthouse"
+              animationData={bgRender}
+              onClick={playSongHandler}
+            />
+          </motion.div>
+          <motion.div
+            animate={{ opacity: 1, transition: { duration: 2 } }}
+            initial={{ opacity: 0 }}
+          >
+            <div
+              className={`${
+                tickerTape ? "tickertape visible" : "tickertape hidden"
+              }`}
+              onClick={welcomeHandler}
+            >
+              <div className="ticker-img">
+                <Lottie animationData={tape} />
+              </div>
+              <p className="marquee">
+                <span>
+                  Welcome to Lulld - Non stop Lo-fi. A unique playlist every
+                  time. Click or tap anywhere to begin. More to come!
+                </span>
+              </p>
+            </div>
+          </motion.div>
 
-      <div
-        className="welcome-container"
-        onClick={welcomeHandler}
-        style={showWelcome ? { opacity: 1 } : { display: "none" }}
-      >
-        Welcome! Click here to begin.
-      </div>
+          <div
+            className={`${showWelcome ? "welcome visible" : "welcome hidden"}`}
+            onClick={welcomeHandler}
+          >
+            <div className="welcome-text"></div>
 
-      <Nav
-        libraryStatus={libraryStatus}
-        setLibraryStatus={setLibraryStatus}
-        audioRef={audioRef}
-        songInfo={songInfo}
-        setSongInfo={setSongInfo}
-        random={random}
-        setRandom={setRandom}
-        songs={songs}
-      />
-      <Song
-        currentSong={currentSong}
-        isPlaying={isPlaying}
-        setSongInfo={setSongInfo}
-        songInfo={songInfo}
-        audioRef={audioRef}
-      />
-      <Player
-        setSongInfo={setSongInfo}
-        songInfo={songInfo}
-        audioRef={audioRef}
-        isPlaying={isPlaying}
-        setIsPlaying={setIsPlaying}
-        currentSong={currentSong}
-        setCurrentSong={setCurrentSong}
-        songs={songs}
-        setSongs={setSongs}
-        last={last}
-        randoTrack={randoTrack}
-        random={random}
-        setRandom={setRandom}
-        playSongHandler={playSongHandler}
-      />
-      <Library
-        isPlaying={isPlaying}
-        audioRef={audioRef}
-        songs={songs}
-        setCurrentSong={setCurrentSong}
-        currentSong={currentSong}
-        libraryStatus={libraryStatus}
-      />
-      <audio
-        onTimeUpdate={timeUpdateHandler}
-        ref={audioRef}
-        src={currentSong.audio}
-        onLoadedMetadata={timeUpdateHandler}
-        onEnded={songEndHandler}
-      ></audio>
-    </div>
+            <div className="tape">
+              <Lottie animationData={tape} />
+            </div>
+          </div>
+
+          <Nav
+            libraryStatus={libraryStatus}
+            setLibraryStatus={setLibraryStatus}
+            audioRef={audioRef}
+            songInfo={songInfo}
+            setSongInfo={setSongInfo}
+            random={random}
+            setRandom={setRandom}
+            songs={songs}
+          />
+          <Song
+            currentSong={currentSong}
+            isPlaying={isPlaying}
+            setSongInfo={setSongInfo}
+            songInfo={songInfo}
+            audioRef={audioRef}
+            playSongHandler={playSongHandler}
+            songs={songs}
+            setSongs={setSongs}
+            random={random}
+            setCurrentSong={setCurrentSong}
+            randoTrack={randoTrack}
+            skipTrackHandler={skipTrackHandler}
+          />
+
+          <Library
+            isPlaying={isPlaying}
+            audioRef={audioRef}
+            songs={songs}
+            setCurrentSong={setCurrentSong}
+            currentSong={currentSong}
+            libraryStatus={libraryStatus}
+          />
+          <audio
+            onTimeUpdate={timeUpdateHandler}
+            ref={audioRef}
+            src={currentSong.audio}
+            onLoadedMetadata={timeUpdateHandler}
+            onEnded={songEndHandler}
+          ></audio>
+        </div>
+      ) : (
+        <Loading />
+      )}
+    </>
   );
 }
 

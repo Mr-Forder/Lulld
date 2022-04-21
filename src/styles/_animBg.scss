@@ -1,7 +1,6 @@
 .anim-bg {
   width: 100%;
   height: 100%;
-  bottom: -140px;
   position: fixed;
   object-fit: fill;
   z-index: -5;
@@ -18,4 +17,49 @@
   position: fixed;
   z-index: -5;
   object-fit: cover;
+}
+
+.tickertape {
+  border: 1px solid white;
+  border-radius: 5px;
+  background: black;
+  color: white;
+  width: 40%;
+  height: 2.5rem;
+  padding: 7px;
+  position: fixed;
+  top: 7rem;
+  left: 50%;
+  z-index: 1;
+  cursor: pointer;
+}
+
+.ticker-img {
+  position: fixed;
+  width: 35rem;
+  margin-left: -15rem;
+  top: 0.8rem;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.marquee {
+  color: white;
+}
+@media screen and (max-width: 1268px) {
+  .anim-bg {
+    bottom: -35%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .anim-bg {
+    bottom: -5%;
+  }
+}
+
+@media screen and (max-width: 468px) {
+  .anim-bg {
+    bottom: -30%;
+  }
 }

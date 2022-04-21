@@ -1,0 +1,77 @@
+.tickertape {
+  border: 1px solid white;
+  border-radius: 5px;
+  background: black;
+  color: white;
+  width: 40%;
+  height: 2.5rem;
+  padding: 7px;
+  position: fixed;
+  top: 7rem;
+  left: 50%;
+  z-index: 1;
+  cursor: pointer;
+}
+
+.ticker-img {
+  position: fixed;
+  width: 35rem;
+  margin-left: -15rem;
+  top: 0.8rem;
+  z-index: 2;
+  pointer-events: none;
+}
+
+@media screen and (max-width: 768px) {
+  .tickertape {
+    top: 15rem;
+    width: 90%;
+    left: 2rem;
+    font-size: 0.8rem;
+    height: 2rem;
+  }
+  .ticker-img {
+    position: fixed;
+    width: 35rem;
+    margin-left: -14rem;
+    top: 8.5rem;
+    z-index: 201;
+  }
+}
+
+.marquee {
+  margin: 0 auto;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.marquee span {
+  display: inline-block;
+  padding-left: 100%;
+  animation: marquee 25s linear infinite;
+}
+
+/* Make it move */
+@keyframes marquee {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(-100%, 0);
+  }
+}
+
+.visible {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 1s linear;
+}
+.hidden {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s 2s, opacity 1s linear;
+}
+
+.social {
+  color: white;
+}

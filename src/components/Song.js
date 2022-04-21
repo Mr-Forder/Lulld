@@ -1,4 +1,33 @@
-const Song = ({ currentSong, isPlaying, audioRef, songInfo, setSongInfo }) => {
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; //import fontawesome
+import {
+  faPlay,
+  faAngleLeft,
+  faAngleRight,
+  faPause,
+  faVolumeDown,
+  faRandom,
+  faArrowCircleRight,
+  faArrowCircleLeft,
+  faPlayCircle,
+  faPauseCircle,
+} from "@fortawesome/free-solid-svg-icons"; //import icons - just fa-play icon etc
+//framer
+import { motion } from "framer-motion";
+
+const Song = ({
+  skipTrackHandler,
+  currentSong,
+  isPlaying,
+  audioRef,
+  songInfo,
+  setSongInfo,
+  playSongHandler,
+  songs,
+  setSongs,
+  setCurrentSong,
+  random,
+  randoTrack,
+}) => {
   const getTime = (time) => {
     return (
       Math.floor(time / 60) + ":" + ("0" + Math.floor(time % 60)).slice(-2)
@@ -15,7 +44,11 @@ const Song = ({ currentSong, isPlaying, audioRef, songInfo, setSongInfo }) => {
   };
 
   return (
-    <div className="song-container">
+    <motion.div
+      className="song-container"
+      animate={{ opacity: 1, transition: { duration: 2 } }}
+      initial={{ opacity: 0 }}
+    >
       <div className="song-img">
         <img
           className={isPlaying ? "rotateSong" : ""}
@@ -28,6 +61,27 @@ const Song = ({ currentSong, isPlaying, audioRef, songInfo, setSongInfo }) => {
         <h4>Now Playing:</h4>
         <h2>{currentSong.name}</h2>
         <h3>{currentSong.artist}</h3>
+
+        <div className="controls">
+          <FontAwesomeIcon
+            onClick={() => skipTrackHandler(`skip-back`)}
+            className="skip-back"
+            size="1x"
+            icon={faAngleLeft}
+          />
+          <FontAwesomeIcon
+            onClickCapture={playSongHandler}
+            className="play"
+            size="1x"
+            icon={isPlaying ? faPauseCircle : faPlayCircle}
+          />
+          <FontAwesomeIcon
+            onClick={() => skipTrackHandler(`skip-forward`)}
+            className="skip-forward"
+            size="1x"
+            icon={faAngleRight}
+          />
+        </div>
 
         <div className="time-control">
           {/* <p>{getTime(songInfo.currentTime)}</p> */}
@@ -50,7 +104,7 @@ const Song = ({ currentSong, isPlaying, audioRef, songInfo, setSongInfo }) => {
           {/* <p>{getTime(songInfo.duration || 0)}</p> */}
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

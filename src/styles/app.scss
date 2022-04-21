@@ -4,6 +4,8 @@
 @import "./nav";
 @import "./animBg";
 @import "./welcome";
+@import "./tickertape";
+@import "./loading";
 * {
   margin: 0;
   padding: 0;
@@ -18,6 +20,7 @@ h3 {
 
 body {
   font-family: "Lato", sans-serif;
+  background: #006eb3;
 }
 
 h3,

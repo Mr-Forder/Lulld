@@ -1,6 +1,7 @@
 import React from "react";
 import { useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFacebookF, faTwitter } from "@fortawesome/free-brands-svg-icons";
 import {
   faMusic,
   faVolumeDown,
@@ -8,6 +9,8 @@ import {
   faBars,
   faTimes,
 } from "@fortawesome/free-solid-svg-icons";
+//framer
+import { motion } from "framer-motion";
 
 const Nav = ({
   setLibraryStatus,
@@ -30,7 +33,11 @@ const Nav = ({
   };
   return (
     <nav>
-      <div className="nav-container">
+      <motion.div
+        className="nav-container"
+        animate={{ opacity: 1, transition: { duration: 2 } }}
+        initial={{ opacity: 0 }}
+      >
         <div>
           <button onClick={() => setLibraryStatus(!libraryStatus)}>
             <FontAwesomeIcon icon={libraryStatus ? faTimes : faBars} />
@@ -47,8 +54,18 @@ const Nav = ({
               icon={faRandom}
             />
           </div>
+          <div className="button">
+            <a href="https://twitter.com/lu11d">
+              <FontAwesomeIcon
+                className="button"
+                className="random"
+                size="1x"
+                icon={faTwitter}
+              />
+            </a>
+          </div>
         </div>
-      </div>
+      </motion.div>
     </nav>
   );
 };
