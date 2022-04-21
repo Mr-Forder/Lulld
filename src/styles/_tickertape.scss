@@ -21,11 +21,11 @@
   pointer-events: none;
 }
 
-@media screen and (max-width: 768px) {
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) {
   .tickertape {
     top: 15rem;
     width: 90%;
-    left: 2rem;
+    left: 3rem;
     font-size: 0.8rem;
     height: 2rem;
   }
@@ -36,7 +36,9 @@
     top: 8.5rem;
   }
 }
-@media screen and (max-width: 768px) {
+
+/* Smartphones (portrait) ----------- */
+@media only screen and (max-width: 500px) {
   .tickertape {
     top: 15rem;
     width: 90%;
@@ -82,9 +84,49 @@
 .hidden {
   visibility: hidden;
   opacity: 0;
-  transition: visibility 0s 2s, opacity 1s linear;
+  transition: visibility 0s 1s, opacity 1s linear;
 }
 
 .social {
   color: white;
+}
+.about-container {
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 15, 24, 0.95);
+  z-index: 51;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: flex;
+}
+.about-info {
+  background: red;
+}
+
+.content-container {
+}
+
+.tape {
+  cursor: pointer;
+  width: 130rem;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+
+  transform: translate(-48%, -40%);
+}
+
+@media screen and (max-width: 768px) {
+  .tape {
+    left: 54%;
+    width: 110rem;
+  }
+}
+
+.blue {
+  color: rgb(0, 134, 211);
+}
+.pink {
+  color: #ed118a;
 }

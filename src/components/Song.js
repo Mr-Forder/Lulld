@@ -1,15 +1,13 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; //import fontawesome
 import {
-  faPlay,
   faAngleLeft,
   faAngleRight,
-  faPause,
   faVolumeDown,
   faRandom,
   faArrowCircleRight,
   faArrowCircleLeft,
-  faPlayCircle,
-  faPauseCircle,
+  faPlay,
+  faPause,
 } from "@fortawesome/free-solid-svg-icons"; //import icons - just fa-play icon etc
 //framer
 import { motion } from "framer-motion";
@@ -70,7 +68,8 @@ const Song = ({
               onClickCapture={playSongHandler}
               className="play"
               size="1x"
-              icon={isPlaying ? faPauseCircle : faPlayCircle}
+              icon={isPlaying ? faPause : faPlay}
+              color="#ed118a"
             />
             <FontAwesomeIcon
               onClick={() => skipTrackHandler(`skip-forward`)}

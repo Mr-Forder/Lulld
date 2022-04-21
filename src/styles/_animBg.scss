@@ -23,6 +23,10 @@
 }
 .camper-landscape {
   margin-top: -8%;
+
+  @media screen and (min-width: 1921px) {
+    margin-top: 0;
+  }
 }
 ///////////////////////////////
 .road-portrait {
@@ -33,6 +37,10 @@
 }
 .road-landscape {
   margin-top: -7%;
+
+  @media screen and (min-width: 1921px) {
+    margin-top: 0;
+  }
 }
 ///////////////////////////////
 .lighthouse-portrait {
@@ -53,6 +61,10 @@
 }
 .plane-landscape {
   margin-top: -5%;
+
+  @media screen and (min-width: 1921px) {
+    margin-top: 0;
+  }
 }
 ///////////////////////////////
 .city-container {
@@ -65,8 +77,15 @@
   transform: translateY(-50%) rotate(90deg);
   margin-top: 30rem;
   min-width: 190%;
-
   overflow: hidden;
+}
+
+.city-landscape {
+  @media screen and (min-width: 1921px) {
+    margin-top: 15%;
+    transform: none;
+    min-height: 100vh;
+  }
 }
 
 @media screen and (max-width: 846px) {
