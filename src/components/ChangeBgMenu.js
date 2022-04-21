@@ -5,6 +5,10 @@ import roadThumbBig from "../img/road-thumb-big.jpg";
 import cityThumbBig from "../img/city-thumb-big.jpg";
 import lighthouseThumbBig from "../img/lighthouse-thumb-big.jpg";
 import planeThumbBig from "../img/plane-thumb-big.jpg";
+import camperVanLandscape from "../img/camper.json";
+import planeLandscape from "../img/plane-landscape.json";
+import cityLandscape from "../img/city-landscape.json";
+import Lottie from "lottie-react";
 
 const ChangeBgMenu = ({
   setBgRender,
@@ -15,7 +19,7 @@ const ChangeBgMenu = ({
   roadLandscape,
 }) => {
   const [bgChangeMenu, setBgChangeMenu] = useState(false);
-
+  const [hoverActive, setHoverActive] = useState(false);
   const bgMenuAni = {
     hidden: { opacity: 0, y: -50 },
     show: {
@@ -47,13 +51,36 @@ const ChangeBgMenu = ({
             key="bg-change-menu "
           >
             <motion.div variants={bgMenuAni} className="thumb-big">
-              <img
-                src={camperThumbBig}
-                onClick={() => {
-                  setBgRender(camperVanLandscape);
-                  setBgChangeMenu(!bgChangeMenu);
-                }}
-              ></img>
+              {!hoverActive ? (
+                <div className="anim-container">
+                  <img
+                    src={cityThumbBig}
+                    onClick={() => {
+                      setBgRender(cityLandscape);
+                      setBgChangeMenu(!bgChangeMenu);
+                    }}
+                    onMouseEnter={() => {
+                      console.log("hovered");
+                      setHoverActive(true);
+                    }}
+                  ></img>
+                </div>
+              ) : (
+                <div
+                  className="anim-container"
+                  onMouseLeavenpm={() => {
+                    setHoverActive(false);
+                  }}
+                >
+                  <Lottie
+                    animationData={camperVanLandscape}
+                    onClick={() => {
+                      setBgRender(planeLandscape);
+                      setBgChangeMenu(!bgChangeMenu);
+                    }}
+                  />
+                </div>
+              )}
             </motion.div>
             <motion.div variants={bgMenuAni} className="thumb-big">
               <img
