@@ -270,6 +270,8 @@ function App() {
               skipTrackHandler={skipTrackHandler}
             />
             <ChangeBgMenu
+              loading={loading}
+              setLoading={setLoading}
               bgChangeMenu={bgChangeMenu}
               setBgChangeMenu={setBgChangeMenu}
               setBgClass={setBgClass}
@@ -282,6 +284,7 @@ function App() {
               lighthouseLandscape={lighthouseLandscape}
               cityLandscape={cityLandscape}
               roadLandscape={roadLandscape}
+              audioRef={audioRef}
             />
           </motion.div>
           {/* {bgChangeMenu && <div className="choice-overlay"></div>} */}

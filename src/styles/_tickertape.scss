@@ -36,6 +36,21 @@
     top: 8.5rem;
   }
 }
+@media screen and (max-width: 768px) {
+  .tickertape {
+    top: 15rem;
+    width: 90%;
+    left: 2rem;
+    font-size: 0.8rem;
+    height: 2rem;
+  }
+  .ticker-img {
+    position: fixed;
+    width: 35rem;
+    margin-left: -14rem;
+    top: 8.5rem;
+  }
+}
 
 .marquee {
   margin: 0 auto;
