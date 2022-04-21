@@ -135,7 +135,7 @@ const ChangeBgMenu = ({
                         setBgLoading(false);
                       }, 2000);
                       setBgRender(cityLandscape);
-                      setBgClass("city-landscape");
+                      setBgClass("");
                       setBgChangeMenu(!bgChangeMenu);
                     }
                   }}

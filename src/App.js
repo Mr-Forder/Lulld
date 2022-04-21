@@ -57,7 +57,7 @@ function App() {
   }
   const [tooltip, setTooltip] = useState();
   const randomList = getRandom(data(), 30);
-  console.log(randomList);
+
   const audioRef = useRef(null); //const, give it whatever name you like, set it to useRef react func (imported above)
   //state
   const [songs, setSongs] = useState(randomList); //pulls data from our util.js file - const songs = an array of objects (songs) from util.js
@@ -177,7 +177,6 @@ function App() {
   useEffect(() => {
     const interval = setInterval(() => {
       setTickerTape(!tickerTape);
-      console.log("This will run 30 secs!");
     }, 30000);
     return () => clearInterval(interval);
   }, [tickerTape]);
@@ -187,7 +186,6 @@ function App() {
     if (tickerTape) {
       const interval = setInterval(() => {
         setTickerTape(!tickerTape);
-        console.log("closing tickertape!");
       }, 24000);
       return () => clearInterval(interval);
     }
@@ -244,7 +242,7 @@ function App() {
                   <span>
                     Welcome to Lulld - Non stop Lo-fi. A unique playlist every
                     time. <strong className="pink">Shuffle</strong> playback is
-                    currently <strong className="blue">active</strong>!
+                    currently active!
                   </span>
                 )}
               </p>
