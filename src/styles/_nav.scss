@@ -2,16 +2,20 @@ nav {
   position: fixed;
   height: 8rem;
   border-radius: 1rem;
-  top: 5%;
+  margin-top: 1rem;
   right: 5%;
   padding: 1rem;
+
   color: white;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-end;
   background: transparent;
-  z-index: -3;
+  z-index: 23;
+
+  @media screen and (min-width: 1080px) {
+  }
 }
 button {
   background: transparent;

@@ -8,11 +8,19 @@ const AniBg = ({ bgRender, bgClass, playSongHandler }) => {
       initial={{ opacity: 0 }}
     >
       <div
-        className={`${
-          bgClass === "camper-portrait" || "camper-landscape"
-            ? "camper-container"
-            : ""
-        }`}
+        className={(() => {
+          switch (bgClass) {
+            case "camper-portrait" || "camper-landscape":
+              return "camper-container";
+            case "city-portrait" || "city-landscape":
+              return "city-container";
+            case "road-portrait" || "road-landscape":
+              return "road-container";
+
+            default:
+              return "";
+          }
+        })()}
       >
         <Lottie
           className={bgClass}

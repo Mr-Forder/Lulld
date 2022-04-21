@@ -7,17 +7,16 @@
   height: 2.5rem;
   padding: 7px;
   position: fixed;
-  top: 7rem;
-  left: 50%;
+  top: 4.5rem;
+  left: 45%;
   z-index: 1;
   cursor: pointer;
 }
 
 .ticker-img {
-  position: fixed;
   width: 35rem;
   margin-left: -15rem;
-  top: 0.8rem;
+  top: -2rem;
   z-index: 2;
   pointer-events: none;
 }
@@ -35,7 +34,6 @@
     width: 35rem;
     margin-left: -14rem;
     top: 8.5rem;
-    z-index: 201;
   }
 }
 

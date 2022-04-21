@@ -1,30 +1,84 @@
 .anim-bg {
-  width: 100%;
-  height: 100%;
   position: fixed;
   object-fit: fill;
   z-index: -5;
-}
-
-.lighthouse {
-}
-
-.camper-landscape {
-  position: absolute;
-  object-fit: fill;
   width: 100%;
-  margin-top: -8rem;
-}
-.camper-container {
-  padding-bottom: 5rem;
-  background: #f3deb3;
   height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: #006eb3;
+  top: 0;
+  left: 0;
 }
-.camper-portrait {
-  position: absolute;
 
-  left: -12rem;
+//BG CSSSSSS'S
+///////////////////////////////
+
+.camper-portrait {
+  //CENTERED PERFECTLY VERTICAL
+  position: absolute;
+  bottom: -0.5rem;
+  left: -45%;
+  width: 150%;
 }
+.camper-landscape {
+  margin-top: -8%;
+}
+///////////////////////////////
+.road-portrait {
+  position: absolute;
+  top: 45%;
+  transform: translateY(-50%);
+  padding: 0;
+}
+.road-landscape {
+  margin-top: -7%;
+}
+///////////////////////////////
+.lighthouse-portrait {
+  position: absolute;
+  top: 53%;
+  transform: translateY(-50%);
+  width: 100%;
+  margin-top: 10%;
+}
+///////////////////////////////
+.plane-portrait {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+  margin-top: -5%;
+  z-index: 4;
+}
+.plane-landscape {
+  margin-top: -5%;
+}
+///////////////////////////////
+.city-container {
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+}
+.city-portrait {
+  transform: translateY(-50%) rotate(90deg);
+  margin-top: 30rem;
+  min-width: 190%;
+
+  overflow: hidden;
+}
+
+@media screen and (max-width: 846px) {
+  .city-portrait {
+    margin-top: 20rem;
+  }
+}
+.city-landscape {
+  margin-top: -5%;
+}
+///////////////////////////////
+
 .App {
   transition: all 0.5s ease;
 }

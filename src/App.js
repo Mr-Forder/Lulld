@@ -11,33 +11,24 @@ import ChangeBgMenu from "./components/ChangeBgMenu";
 import "./styles/app.scss";
 //framer
 import { motion } from "framer-motion";
-
+import tape from "./img/drip.json";
 //Animated bg
 
 import Lottie from "lottie-react";
+//LANDSCAPE BGS
 import lighthouseLandscape from "./img/lighthouse-landscape.json";
-import lighthousePortrait from "./img/lighthouse-portrait.json";
 import camperVanLandscape from "./img/camper.json";
-import camperVanPortrait from "./img/camper.json";
 import planeLandscape from "./img/plane-landscape.json";
 import cityLandscape from "./img/city-landscape.json";
-import planeLandscapeColours from "./img/road-landscape.json";
 import roadLandscape from "./img/road-nocar.json";
-//thumbs
-import camperThumb from "./img/camperthumb.svg";
-import lighthouseThumb from "./img/lighthousethumb.svg";
-import planeThumb from "./img/planethumb.svg";
-import cityThumb from "./img/citythumb.svg";
-import roadThumb from "./img/roadthumb.svg";
-import tape from "./img/drip.json";
-//better thumbs?
-import camperThumbBig from "./img/camper-thumb-big.jpg";
-import roadThumbBig from "./img/road-thumb-big.jpg";
-import cityThumbBig from "./img/city-thumb-big.jpg";
-import lighthouseThumbBig from "./img/lighthouse-thumb-big.jpg";
-import planeThumbBig from "./img/plane-thumb-big.jpg";
+
+//PORTRAIT BGS
+import lighthousePortrait from "./img/lighthouse-portrait.json";
+import planePortrait from "./img/plane-portrait.json";
+import roadPortrait from "./img/road-portrait.json";
+
 //device detection
-import { isMobile } from "react-device-detect";
+
 //loading
 import Loading from "./components/Loading";
 import AniBg from "./components/AniBg";
@@ -71,6 +62,8 @@ function App() {
   //state
   const [songs, setSongs] = useState(randomList); //pulls data from our util.js file - const songs = an array of objects (songs) from util.js
   const [currentSong, setCurrentSong] = useState(songs[0]); //grabs the first song from out const songs array
+  //bg menu change
+  const [bgChangeMenu, setBgChangeMenu] = useState(false);
 
   const [songInfo, setSongInfo] = useState({
     currentTime: 0,
@@ -145,37 +138,33 @@ function App() {
   const [showWelcome, setShowWelcome] = useState(false);
 
   //CONDITIONAL BG
+
   const [bgRender, setBgRender] = useState(camperVanLandscape);
   const [bgClass, setBgClass] = useState("camper-landscape");
 
-  //set landscape or portrait on window resize
-  window.addEventListener("resize", function () {
+  useEffect(() => {
     if (window.innerHeight > window.innerWidth) {
       //portrait
-      setBgRender(camperVanPortrait);
       setBgClass("camper-portrait");
     } else {
       //landscape
-      setBgRender(camperVanLandscape);
+
       setBgClass("camper-landscape");
     }
-  });
-
-  //set landscape or portrait on component mount
-  const deviceDetector = () => {
-    if (isMobile) {
-      setBgRender(camperVanPortrait);
-      setBgClass("camper-portrait");
-    } else {
-      setBgRender(camperVanLandscape);
-      setBgClass("camper-landscape");
-    }
-  };
-
-  useEffect(() => {
-    deviceDetector();
   }, []);
 
+  //set landscape or portrait on window resize
+  // window.addEventListener("resize", function () {
+  //   if (window.innerHeight > window.innerWidth) {
+  //     //portrait
+  //     setBgRender(camperVanLandscape);
+  //     setBgClass("camper-portrait");
+  //   } else {
+  //     //landscape
+  //     setBgRender(camperVanLandscape);
+  //     setBgClass("camper-landscape");
+  //   }
+  // });
   //TICKERTAPE
   const welcomeHandler = () => {
     setShowWelcome(!showWelcome);
@@ -184,13 +173,19 @@ function App() {
 
   const [tickerTape, setTickerTape] = useState(true);
   //begin tickertape
+
   useEffect(() => {
-    const interval = setInterval(() => {
-      setTickerTape(!tickerTape);
-      console.log("This will run 60 secs!");
-    }, 30000);
-    return () => clearInterval(interval);
+    if (bgRender !== planePortrait) {
+      const interval = setInterval(() => {
+        setTickerTape(!tickerTape);
+        console.log("This will run 30 secs!");
+      }, 30000);
+      return () => clearInterval(interval);
+    } else {
+      console.log("tickertape disabled");
+    }
   }, [tickerTape]);
+
   //Close tickertape
   useEffect(() => {
     if (tickerTape) {
@@ -213,8 +208,9 @@ function App() {
             bgClass={bgClass}
             playSongHandler={playSongHandler}
           />
+
           <motion.div
-            animate={{ opacity: 1, transition: { duration: 2 } }}
+            animate={{ opacity: 1, transition: { duration: 1 } }}
             initial={{ opacity: 0 }}
           >
             <div
@@ -254,30 +250,41 @@ function App() {
             setRandom={setRandom}
             songs={songs}
           />
-
-          <ChangeBgMenu
-            setBgRender={setBgRender}
-            camperVanLandscape={camperVanLandscape}
-            planeLandscape={planeLandscape}
-            lighthouseLandscape={lighthouseLandscape}
-            cityLandscape={cityLandscape}
-            roadLandscape={roadLandscape}
-          />
-
-          <Song
-            currentSong={currentSong}
-            isPlaying={isPlaying}
-            setSongInfo={setSongInfo}
-            songInfo={songInfo}
-            audioRef={audioRef}
-            playSongHandler={playSongHandler}
-            songs={songs}
-            setSongs={setSongs}
-            random={random}
-            setCurrentSong={setCurrentSong}
-            randoTrack={randoTrack}
-            skipTrackHandler={skipTrackHandler}
-          />
+          <motion.div
+            animate={{ opacity: 1, transition: { duration: 1 } }}
+            initial={{ opacity: 0 }}
+            className="main-controls"
+          >
+            <Song
+              currentSong={currentSong}
+              isPlaying={isPlaying}
+              setSongInfo={setSongInfo}
+              songInfo={songInfo}
+              audioRef={audioRef}
+              playSongHandler={playSongHandler}
+              songs={songs}
+              setSongs={setSongs}
+              random={random}
+              setCurrentSong={setCurrentSong}
+              randoTrack={randoTrack}
+              skipTrackHandler={skipTrackHandler}
+            />
+            <ChangeBgMenu
+              bgChangeMenu={bgChangeMenu}
+              setBgChangeMenu={setBgChangeMenu}
+              setBgClass={setBgClass}
+              lighthousePortrait={lighthousePortrait}
+              planePortrait={planePortrait}
+              roadPortrait={roadPortrait}
+              setBgRender={setBgRender}
+              camperVanLandscape={camperVanLandscape}
+              planeLandscape={planeLandscape}
+              lighthouseLandscape={lighthouseLandscape}
+              cityLandscape={cityLandscape}
+              roadLandscape={roadLandscape}
+            />
+          </motion.div>
+          {/* {bgChangeMenu && <div className="choice-overlay"></div>} */}
           <Library
             isPlaying={isPlaying}
             audioRef={audioRef}

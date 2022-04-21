@@ -8,10 +8,12 @@
 @import "./loading";
 @import "./changeBgMenu";
 
-* {
+*,
+html {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  overflow: hidden;
 }
 
 h1,
@@ -22,7 +24,11 @@ h3 {
 
 body {
   font-family: "Lato", sans-serif;
-  background: #006eb3;
+  background: black;
+  display: relative;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
 }
 
 h3,
