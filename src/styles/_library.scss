@@ -1,5 +1,5 @@
 .library {
-  background: black;
+  background: rgb(0, 113, 179);
   position: fixed;
   top: 0;
   left: 0%;
@@ -12,7 +12,6 @@
     padding: 2rem;
     color: white;
     font-size: 1.5rem;
-    font-weight: lighter;
   }
   transform: translateX(-100%);
   transition: all 0.5s ease;
@@ -29,7 +28,7 @@
   cursor: pointer;
   transition: background 0.5s ease;
   &:hover {
-    background: rgb(0, 113, 179);
+    background: rgb(0, 33, 53);
   }
 }
 
@@ -37,9 +36,10 @@
   padding-left: 1rem;
   h3 {
     font-size: 1rem;
+    font-weight: bold;
   }
   h4 {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
   }
 }
 
@@ -63,7 +63,7 @@
 }
 
 .selected {
-  background: rgb(78, 78, 78);
+  background: rgb(0, 134, 211);
 }
 
 .active-library {

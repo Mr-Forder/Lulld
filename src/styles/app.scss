@@ -6,6 +6,8 @@
 @import "./welcome";
 @import "./tickertape";
 @import "./loading";
+@import "./changeBgMenu";
+
 * {
   margin: 0;
   padding: 0;
@@ -15,7 +17,7 @@
 h1,
 h2,
 h3 {
-  color: rgb(82, 82, 82);
+  color: #ed118a;
 }
 
 body {

@@ -6,30 +6,49 @@ import Library from "./components/Library";
 //import our track data
 import data from "./data";
 import Nav from "./components/Nav";
-
+import ChangeBgMenu from "./components/ChangeBgMenu";
 //styles
 import "./styles/app.scss";
 //framer
 import { motion } from "framer-motion";
 
 //Animated bg
-import { useLottie } from "lottie-react";
+
 import Lottie from "lottie-react";
 import lighthouseLandscape from "./img/lighthouse-landscape.json";
 import lighthousePortrait from "./img/lighthouse-portrait.json";
+import camperVanLandscape from "./img/camper.json";
+import camperVanPortrait from "./img/camper.json";
+import planeLandscape from "./img/plane-landscape.json";
+import cityLandscape from "./img/city-landscape.json";
+import planeLandscapeColours from "./img/road-landscape.json";
+import roadLandscape from "./img/road-nocar.json";
+//thumbs
+import camperThumb from "./img/camperthumb.svg";
+import lighthouseThumb from "./img/lighthousethumb.svg";
+import planeThumb from "./img/planethumb.svg";
+import cityThumb from "./img/citythumb.svg";
+import roadThumb from "./img/roadthumb.svg";
 import tape from "./img/drip.json";
+//better thumbs?
+import camperThumbBig from "./img/camper-thumb-big.jpg";
+import roadThumbBig from "./img/road-thumb-big.jpg";
+import cityThumbBig from "./img/city-thumb-big.jpg";
+import lighthouseThumbBig from "./img/lighthouse-thumb-big.jpg";
+import planeThumbBig from "./img/plane-thumb-big.jpg";
 //device detection
 import { isMobile } from "react-device-detect";
 //loading
 import Loading from "./components/Loading";
-
+import AniBg from "./components/AniBg";
 //CREATE RANDOM PLAYLIST
 function App() {
   //loading screen
 
   const [loading, setLoading] = useState(true);
+
   useEffect(() => {
-    setTimeout(() => setLoading(false), 200); //extend me to do a PROPA animated loader
+    setTimeout(() => setLoading(false), 2200); //extend me to do a PROPA animated loader
   }, []);
 
   function getRandom(arr, n) {
@@ -47,17 +66,6 @@ function App() {
   }
 
   const randomList = getRandom(data(), 30);
-
-  //CONDITIONAL BG
-  const [bgRender, setBgRender] = useState(lighthouseLandscape);
-
-  window.addEventListener("resize", function () {
-    if (window.innerHeight > window.innerWidth) {
-      setBgRender(lighthousePortrait);
-    } else {
-      setBgRender(lighthouseLandscape);
-    }
-  });
 
   const audioRef = useRef(null); //const, give it whatever name you like, set it to useRef react func (imported above)
   //state
@@ -134,24 +142,34 @@ function App() {
     if (isPlaying) audioRef.current.play(); //if song isplaying when this happens, play the song we've just skipped to
   };
 
-  const options = {
-    animationData: lighthouseLandscape,
-    loop: true,
-  };
-
-  const { View } = useLottie(options);
-
   const [showWelcome, setShowWelcome] = useState(false);
 
-  const welcomeHandler = () => {
-    setShowWelcome(!showWelcome);
-    setTickerTape(!setTickerTape);
-  };
+  //CONDITIONAL BG
+  const [bgRender, setBgRender] = useState(camperVanLandscape);
+  const [bgClass, setBgClass] = useState("camper-landscape");
 
+  //set landscape or portrait on window resize
+  window.addEventListener("resize", function () {
+    if (window.innerHeight > window.innerWidth) {
+      //portrait
+      setBgRender(camperVanPortrait);
+      setBgClass("camper-portrait");
+    } else {
+      //landscape
+      setBgRender(camperVanLandscape);
+      setBgClass("camper-landscape");
+    }
+  });
+
+  //set landscape or portrait on component mount
   const deviceDetector = () => {
-    isMobile
-      ? setBgRender(lighthousePortrait)
-      : setBgRender(lighthouseLandscape);
+    if (isMobile) {
+      setBgRender(camperVanPortrait);
+      setBgClass("camper-portrait");
+    } else {
+      setBgRender(camperVanLandscape);
+      setBgClass("camper-landscape");
+    }
   };
 
   useEffect(() => {
@@ -159,6 +177,10 @@ function App() {
   }, []);
 
   //TICKERTAPE
+  const welcomeHandler = () => {
+    setShowWelcome(!showWelcome);
+    setTickerTape(!setTickerTape);
+  };
 
   const [tickerTape, setTickerTape] = useState(true);
   //begin tickertape
@@ -182,21 +204,15 @@ function App() {
 
   return (
     <>
-      {loading === false ? (
+      {!loading ? (
         //interpolated classname - classname is App - check if library state is active, if so,  add "library-active" class to it, otherwise, do nothing.
         //library-active class jsut adds 30% left margin, squishing main window down when activated. added transition effect in .App css to animate it.
         <div className={`App ${libraryStatus ? "library-active" : ""}`}>
-          <motion.div
-            className="anim-bg"
-            animate={{ opacity: 1, transition: { duration: 1 } }}
-            initial={{ opacity: 0 }}
-          >
-            <Lottie
-              className="lighthouse"
-              animationData={bgRender}
-              onClick={playSongHandler}
-            />
-          </motion.div>
+          <AniBg
+            bgRender={bgRender}
+            bgClass={bgClass}
+            playSongHandler={playSongHandler}
+          />
           <motion.div
             animate={{ opacity: 1, transition: { duration: 2 } }}
             initial={{ opacity: 0 }}
@@ -218,7 +234,6 @@ function App() {
               </p>
             </div>
           </motion.div>
-
           <div
             className={`${showWelcome ? "welcome visible" : "welcome hidden"}`}
             onClick={welcomeHandler}
@@ -229,7 +244,6 @@ function App() {
               <Lottie animationData={tape} />
             </div>
           </div>
-
           <Nav
             libraryStatus={libraryStatus}
             setLibraryStatus={setLibraryStatus}
@@ -240,6 +254,16 @@ function App() {
             setRandom={setRandom}
             songs={songs}
           />
+
+          <ChangeBgMenu
+            setBgRender={setBgRender}
+            camperVanLandscape={camperVanLandscape}
+            planeLandscape={planeLandscape}
+            lighthouseLandscape={lighthouseLandscape}
+            cityLandscape={cityLandscape}
+            roadLandscape={roadLandscape}
+          />
+
           <Song
             currentSong={currentSong}
             isPlaying={isPlaying}
@@ -254,7 +278,6 @@ function App() {
             randoTrack={randoTrack}
             skipTrackHandler={skipTrackHandler}
           />
-
           <Library
             isPlaying={isPlaying}
             audioRef={audioRef}

@@ -44,67 +44,70 @@ const Song = ({
   };
 
   return (
-    <motion.div
-      className="song-container"
-      animate={{ opacity: 1, transition: { duration: 2 } }}
-      initial={{ opacity: 0 }}
-    >
-      <div className="song-img">
-        <img
-          className={isPlaying ? "rotateSong" : ""}
-          alt={currentSong.name}
-          src={currentSong.cover}
-        ></img>
-      </div>
-
-      <div className="song-info">
-        <h4>Now Playing:</h4>
-        <h2>{currentSong.name}</h2>
-        <h3>{currentSong.artist}</h3>
-
-        <div className="controls">
-          <FontAwesomeIcon
-            onClick={() => skipTrackHandler(`skip-back`)}
-            className="skip-back"
-            size="1x"
-            icon={faAngleLeft}
-          />
-          <FontAwesomeIcon
-            onClickCapture={playSongHandler}
-            className="play"
-            size="1x"
-            icon={isPlaying ? faPauseCircle : faPlayCircle}
-          />
-          <FontAwesomeIcon
-            onClick={() => skipTrackHandler(`skip-forward`)}
-            className="skip-forward"
-            size="1x"
-            icon={faAngleRight}
-          />
+    <>
+      {" "}
+      <motion.div
+        className="song-container"
+        animate={{ opacity: 1, transition: { duration: 2 } }}
+        initial={{ opacity: 0 }}
+      >
+        <div className="song-img">
+          <img
+            className={isPlaying ? "rotateSong" : ""}
+            alt={currentSong.name}
+            src={currentSong.cover}
+          ></img>
         </div>
 
-        <div className="time-control">
-          {/* <p>{getTime(songInfo.currentTime)}</p> */}
+        <div className="song-info">
+          <h4>Now Playing:</h4>
+          <h2>{currentSong.name}</h2>
+          <h3>{currentSong.artist}</h3>
 
-          <div
-            className="track"
-            style={{
-              background: `linear-gradient(to right, ${currentSong.color[0]},${currentSong.color[1]})`,
-            }}
-          >
-            <input
-              min={0}
-              max={songInfo.duration || 0}
-              value={songInfo.currentTime}
-              onChange={dragHandler}
-              type="range"
+          <div className="controls">
+            <FontAwesomeIcon
+              onClick={() => skipTrackHandler(`skip-back`)}
+              className="skip-back"
+              size="1x"
+              icon={faAngleLeft}
             />
-            <div style={trackAnim} className="animate-track"></div>
+            <FontAwesomeIcon
+              onClickCapture={playSongHandler}
+              className="play"
+              size="1x"
+              icon={isPlaying ? faPauseCircle : faPlayCircle}
+            />
+            <FontAwesomeIcon
+              onClick={() => skipTrackHandler(`skip-forward`)}
+              className="skip-forward"
+              size="1x"
+              icon={faAngleRight}
+            />
           </div>
-          {/* <p>{getTime(songInfo.duration || 0)}</p> */}
+
+          <div className="time-control">
+            {/* <p>{getTime(songInfo.currentTime)}</p> */}
+
+            <div
+              className="track"
+              style={{
+                background: `linear-gradient(to right, ${currentSong.color[0]},${currentSong.color[1]})`,
+              }}
+            >
+              <input
+                min={0}
+                max={songInfo.duration || 0}
+                value={songInfo.currentTime}
+                onChange={dragHandler}
+                type="range"
+              />
+              <div style={trackAnim} className="animate-track"></div>
+            </div>
+            {/* <p>{getTime(songInfo.duration || 0)}</p> */}
+          </div>
         </div>
-      </div>
-    </motion.div>
+      </motion.div>
+    </>
   );
 };
 
