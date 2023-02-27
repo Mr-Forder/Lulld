@@ -1,0 +1,137 @@
+.anim-bg {
+  position: fixed;
+  object-fit: fill;
+  z-index: -5;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: #006eb3;
+  top: 0;
+  left: 0;
+}
+
+//BG CSSSSSS'S
+///////////////////////////////
+
+.camper-portrait {
+  //CENTERED PERFECTLY VERTICAL
+  position: absolute;
+  bottom: -0.5rem;
+  left: -45%;
+  width: 150%;
+}
+.camper-landscape {
+  position: absolute;
+  margin-top: -170px;
+  margin-left: -5%;
+  min-width: 110vw;
+}
+///////////////////////////////
+.road-portrait {
+  position: absolute;
+  top: 48%;
+  transform: translateY(-50%);
+  min-width: 125%;
+  padding: 0;
+}
+.road-landscape {
+  @media screen and (min-width: 1921px) {
+    margin-top: 0;
+  }
+}
+///////////////////////////////
+.lighthouse-portrait {
+  position: absolute;
+  top: 53%;
+  transform: translateY(-50%);
+  min-width: 120%;
+}
+///////////////////////////////
+
+.city-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.city-portrait {
+  transform: translateY(-30%) rotate(90deg);
+  min-width: 200%;
+  overflow: hidden;
+}
+
+.city-landscape {
+  @media screen and (min-width: 1921px) {
+    margin-top: 15%;
+    transform: none;
+    min-height: 100vh;
+  }
+}
+
+@media screen and (max-width: 846px) {
+  .city-portrait {
+    margin-top: 20rem;
+  }
+}
+.city-landscape {
+  margin-top: -5%;
+}
+///////////////////////////////
+
+.App {
+  transition: all 0.5s ease;
+}
+
+.library-active {
+  margin-left: 15%;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  z-index: -5;
+  object-fit: cover;
+}
+
+.tickertape {
+  border: 1px solid white;
+  border-radius: 5px;
+  background: black;
+  color: white;
+  width: 40%;
+  height: 2.5rem;
+  padding: 7px;
+  position: fixed;
+  top: 7rem;
+  left: 50%;
+  z-index: 1;
+  cursor: pointer;
+}
+
+.ticker-img {
+  position: fixed;
+  width: 35rem;
+  margin-left: -15rem;
+  top: 0.8rem;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.marquee {
+  color: white;
+}
+@media screen and (max-width: 1268px) {
+  .anim-bg {
+    bottom: -35%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .anim-bg {
+    bottom: -5%;
+  }
+}
+
+@media screen and (max-width: 468px) {
+  .anim-bg {
+    bottom: -30%;
+  }
+}

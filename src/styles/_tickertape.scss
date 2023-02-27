@@ -1,0 +1,132 @@
+.tickertape {
+  border: none;
+  border-radius: 5px;
+  background: rgb(0, 33, 53);
+  color: white;
+  width: 40%;
+  height: 2.5rem;
+  padding: 7px;
+  position: fixed;
+  top: 4.5rem;
+  left: 45%;
+  z-index: 1;
+  cursor: pointer;
+}
+
+.ticker-img {
+  width: 35rem;
+  margin-left: -15rem;
+  top: -2rem;
+  z-index: 2;
+  pointer-events: none;
+}
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) {
+  .tickertape {
+    top: 15rem;
+    width: 90%;
+    left: 3rem;
+    font-size: 0.8rem;
+    height: 2rem;
+  }
+  .ticker-img {
+    position: fixed;
+    width: 35rem;
+    margin-left: -14rem;
+    top: 8.5rem;
+  }
+}
+
+/* Smartphones (portrait) ----------- */
+@media only screen and (max-width: 500px) {
+  .tickertape {
+    top: 15rem;
+    width: 90%;
+    left: 2rem;
+    font-size: 0.8rem;
+    height: 2rem;
+  }
+  .ticker-img {
+    position: fixed;
+    width: 35rem;
+    margin-left: -14rem;
+    top: 8.5rem;
+  }
+}
+
+.marquee {
+  margin: 0 auto;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.marquee span {
+  display: inline-block;
+  padding-left: 100%;
+  animation: marquee 25s linear infinite;
+}
+
+/* Make it move */
+@keyframes marquee {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(-100%, 0);
+  }
+}
+
+.visible {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 1s linear;
+}
+.hidden {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s 1s, opacity 1s linear;
+}
+
+.social {
+  color: white;
+}
+.about-container {
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 15, 24, 0.95);
+  z-index: 51;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: flex;
+}
+.about-info {
+  background: red;
+}
+
+.content-container {
+}
+
+.tape {
+  cursor: pointer;
+  width: 130rem;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+
+  transform: translate(-48%, -40%);
+}
+
+@media screen and (max-width: 768px) {
+  .tape {
+    left: 54%;
+    width: 110rem;
+  }
+}
+
+.blue {
+  color: rgb(0, 134, 211);
+}
+.pink {
+  color: #ed118a;
+}

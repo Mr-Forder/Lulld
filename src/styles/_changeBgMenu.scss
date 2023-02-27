@@ -1,0 +1,30 @@
+.thumb-big {
+  cursor: pointer;
+
+  img {
+    width: 22rem;
+    // border: solid white 2px;
+    border-radius: 10px;
+  }
+  z-index: 49;
+}
+
+.lottie-thumb {
+  width: 22rem;
+  height: 22rem;
+  overflow: hidden;
+  margin-top: -9.5rem;
+  border-radius: 10px;
+  img {
+    border-radius: 10px;
+  }
+}
+
+.bg-loader {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  z-index: 50000;
+}
